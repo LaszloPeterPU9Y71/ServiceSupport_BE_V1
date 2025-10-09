@@ -1,0 +1,8 @@
+databaseChangeLog:
+  # 1) Séma: minden YAML a tables mappából (alfabetikus sorrendben fut)
+  - includeAll:
+      path: db/changelog/tables
+
+  # 2) Seed: minden FORMATTED SQL a seeds mappából (alfabetikus sorrendben)
+  - includeAll:
+      path: db/changelog/data

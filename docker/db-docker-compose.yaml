@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql:8.4
+    container_name: servicedesk-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: servicedesk
+      MYSQL_USER: servicedesk
+      MYSQL_PASSWORD: servicedesk
+    ports:
+      - "3306:3306"
+
+  adminer:
+    image: adminer:latest
+    container_name: servicedesk-adminer
+    restart: unless-stopped
+    ports:
+      - "8081:8080"

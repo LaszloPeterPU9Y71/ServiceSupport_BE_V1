@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: 010-create-defect
+      author: you
+      changes:
+        - createTable:
+            tableName: defect
+            remarks: Hibák
+            columns:
+              - column:
+                  name: defect_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: defect_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true

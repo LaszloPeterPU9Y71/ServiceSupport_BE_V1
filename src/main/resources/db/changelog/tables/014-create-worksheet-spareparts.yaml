@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: 014-create-worksheet-spareparts
+      author: you
+      changes:
+        - createTable:
+            tableName: worksheet_spareparts
+            remarks: Tool-hoz rendelt alkatrészek darabszámmal
+            columns:
+              - column:
+                  name: worksheet_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: spare_parts_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: quantity
+                  type: INT
+                  constraints:
+                    nullable: false
+                    defaultValueNumeric: 1
+
+        - addPrimaryKey:
+            tableName: worksheet_spareparts
+            columnNames: worksheet_id, spare_parts_id
+            constraintName: pk_worksheet_spareparts
+
+        - addForeignKeyConstraint:
+            baseTableName: worksheet_spareparts
+            baseColumnNames: worksheet_id
+            referencedTableName: worksheet
+            referencedColumnNames: worksheet_id
+            constraintName: fk_worksheet_spareparts_tool
+
+        - addForeignKeyConstraint:
+            baseTableName: worksheet_spareparts
+            baseColumnNames: spare_parts_id
+            referencedTableName: spare_parts
+            referencedColumnNames: spare_parts_id
+            constraintName: fk_worksheet_spareparts_part

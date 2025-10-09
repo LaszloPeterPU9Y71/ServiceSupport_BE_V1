@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: 013-create-spare-parts
+      author: you
+      changes:
+        - createTable:
+            tableName: spare_parts
+            remarks: Alkatrészek
+            columns:
+              - column:
+                  name: spare_parts_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: spare_parts_netto_buying_price
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: spare_parts_netto_selling_price
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: spare_parts_item_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: spare_parts_item_number
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true

@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-create-company
+      author: you
+      changes:
+        - createTable:
+            tableName: company
+            columns:
+              - column:
+                  name: company_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: company_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: company_postal_code
+                  type: INT
+              - column:
+                  name: company_status
+                  type: BIT
+              - column:
+                  name: company_street
+                  type: VARCHAR(255)
+              - column:
+                  name: company_tax_number
+                  type: VARCHAR(255)
+              - column:
+                  name: company_town
+                  type: VARCHAR(255)

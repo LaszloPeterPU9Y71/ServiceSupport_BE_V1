@@ -1,0 +1,80 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-users
+      author: you
+      changes:
+        - createTable:
+            tableName: users
+            remarks: Felhasználók
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password_hash
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: full_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone_number
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: position
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: enabled
+                  type: TINYINT(1)
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  defaultValueComputed: "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: company_id
+                  type: BIGINT
+                  defaultValueNumeric: "1"
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: users
+            baseColumnNames: company_id
+            referencedTableName: company
+            referencedColumnNames: company_id
+            constraintName: fk_users_company
+
+        - createIndex:
+            tableName: users
+            indexName: ix_users_email
+            unique: true
+            columns:
+              - column:
+                  name: email

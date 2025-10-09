@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: 008-create-tool
+      author: you
+      changes:
+        - createTable:
+            tableName: tool
+            remarks: Szerszámok
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: tool_id
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tool_item_number
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tool_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tool_serial_number
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
+              - column:
+                  name: tool_type_number
+                  type: VARCHAR(255)
+              - column:
+                  name: tool_owner_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: tool
+            baseColumnNames: tool_owner_id
+            referencedTableName: owner_company_employee
+            referencedColumnNames: owner_company_employee_id
+            constraintName: fk_tool_owner

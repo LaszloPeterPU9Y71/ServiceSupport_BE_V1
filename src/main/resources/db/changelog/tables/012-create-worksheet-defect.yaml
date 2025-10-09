@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: 012-worksheet-defect
+      author: you
+      changes:
+        - createTable:
+            tableName: worksheet_defect
+            columns:
+              - column:
+                  name: worksheet_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: defect_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            tableName: worksheet_defect
+            columnNames: worksheet_id, defect_id
+            constraintName: pk_worksheet_defect
+
+        - addForeignKeyConstraint:
+            baseTableName: worksheet_defect
+            baseColumnNames: worksheet_id
+            referencedTableName: worksheet
+            referencedColumnNames: worksheet_id
+            onDelete: CASCADE
+            constraintName: fk_worksheet_defect_worksheet
+
+        - addForeignKeyConstraint:
+            baseTableName: worksheet_defect
+            baseColumnNames: defect_id
+            referencedTableName: defect
+            referencedColumnNames: defect_id
+            onDelete: CASCADE
+            constraintName: fk_worksheet_defect_defect
