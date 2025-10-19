@@ -20,7 +20,7 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("changePassword_request")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-10T00:38:29.316816200+02:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-17T20:54:47.397666300+02:00[Europe/Budapest]")
 public class ChangePasswordRequest {
 
   private String oldPassword;

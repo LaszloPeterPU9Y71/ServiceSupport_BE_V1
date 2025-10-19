@@ -4,4 +4,5 @@ import com.service.support.servicesupport_be_v1.persistance.entity.OwnerCompanyE
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface OwnerCompanyRepository extends JpaRepository<OwnerCompanyEntity, Long> {
+    OwnerCompanyEntity findByName(String name);
 }

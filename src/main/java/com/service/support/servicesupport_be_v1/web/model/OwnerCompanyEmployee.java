@@ -18,7 +18,7 @@ import jakarta.annotation.Generated;
  * OwnerCompanyEmployee
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-10T00:38:29.316816200+02:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-17T20:54:47.397666300+02:00[Europe/Budapest]")
 public class OwnerCompanyEmployee {
 
   private Integer id;
@@ -31,7 +31,7 @@ public class OwnerCompanyEmployee {
 
   private String title;
 
-  private Integer ownerCompanyId;
+  private String ownerCompanyName;
 
   public OwnerCompanyEmployee id(Integer id) {
     this.id = id;
@@ -133,24 +133,24 @@ public class OwnerCompanyEmployee {
     this.title = title;
   }
 
-  public OwnerCompanyEmployee ownerCompanyId(Integer ownerCompanyId) {
-    this.ownerCompanyId = ownerCompanyId;
+  public OwnerCompanyEmployee ownerCompanyName(String ownerCompanyName) {
+    this.ownerCompanyName = ownerCompanyName;
     return this;
   }
 
   /**
-   * Get ownerCompanyId
-   * @return ownerCompanyId
+   * Get ownerCompanyName
+   * @return ownerCompanyName
   */
   
-  @Schema(name = "ownerCompanyId", example = "10", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("ownerCompanyId")
-  public Integer getOwnerCompanyId() {
-    return ownerCompanyId;
+  @Schema(name = "ownerCompanyName", example = "Jóska Kft", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("ownerCompanyName")
+  public String getOwnerCompanyName() {
+    return ownerCompanyName;
   }
 
-  public void setOwnerCompanyId(Integer ownerCompanyId) {
-    this.ownerCompanyId = ownerCompanyId;
+  public void setOwnerCompanyName(String ownerCompanyName) {
+    this.ownerCompanyName = ownerCompanyName;
   }
 
   @Override
@@ -167,12 +167,12 @@ public class OwnerCompanyEmployee {
         Objects.equals(this.name, ownerCompanyEmployee.name) &&
         Objects.equals(this.telNum, ownerCompanyEmployee.telNum) &&
         Objects.equals(this.title, ownerCompanyEmployee.title) &&
-        Objects.equals(this.ownerCompanyId, ownerCompanyEmployee.ownerCompanyId);
+        Objects.equals(this.ownerCompanyName, ownerCompanyEmployee.ownerCompanyName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, email, name, telNum, title, ownerCompanyId);
+    return Objects.hash(id, email, name, telNum, title, ownerCompanyName);
   }
 
   @Override
@@ -184,7 +184,7 @@ public class OwnerCompanyEmployee {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    telNum: ").append(toIndentedString(telNum)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
-    sb.append("    ownerCompanyId: ").append(toIndentedString(ownerCompanyId)).append("\n");
+    sb.append("    ownerCompanyName: ").append(toIndentedString(ownerCompanyName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

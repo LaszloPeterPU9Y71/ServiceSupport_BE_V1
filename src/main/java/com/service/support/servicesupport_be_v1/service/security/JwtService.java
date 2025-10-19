@@ -19,7 +19,6 @@ import java.util.function.Function;
 public class JwtService {
 
     private static final String SECRET_KEY = "z8B#Nf5yK9LpQ3tXv6!sGdR2hC7uJwE0z8B#Nf5yK9LpQ3tXv6!sGdR2hC7uJwE0";
-    int expirationTime = 1000*60*60*9; // a műszak ideje, 9 óra
 
     private Key getSignInKey() {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
@@ -49,6 +48,8 @@ public class JwtService {
         claims.put("position", user.getPosition());
 
 
+        // a műszak ideje, 9 óra
+        long expirationTime = 1000L * 60 * 60 * 90;
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(userDetails.getUsername()) // email kerül a sub-ba

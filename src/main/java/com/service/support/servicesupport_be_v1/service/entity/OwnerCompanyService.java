@@ -32,4 +32,9 @@ public class OwnerCompanyService {
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
+
+    public OwnerCompanyEntity findByName(String ownerCompanyName) {
+        return repository.findByName(ownerCompanyName);
+    }
+
 }

@@ -7,7 +7,7 @@ VALUES
     (4, 4, NOW(), 'BEERKEZETT', 0, 0, 0, 0, 3, 'nem jó'),
     (5, 5, NOW(), 'BEERKEZETT', 1, 0, 0, 0, 1, 'Elromlott'),
     (6, 6, NOW(), 'BEERKEZETT', 1, 0, 1, 0, 4, 'Zörög'),
-    (7, 1, NOW(), 'FOLYAMATBAN', 1, 0, 1, 1, 5, 'nem jó'),
-    (8, 2, NOW(), 'BEERKEZETT', 1, 0, 0, 0, 4, 'csörög'),
-    (9, 3, NOW(), 'BEERKEZETT', 1, 0, 0, 0, 3, 'nem jó'),
-    (10, 4, NOW(), 'BEERKEZETT', 0, 1, 1, 1, 2, 'jó, csak nem fúr');
+    (7, 7, NOW(), 'FOLYAMATBAN', 1, 0, 1, 1, 5, 'nem jó'),
+    (8, 8, NOW(), 'BEERKEZETT', 1, 0, 0, 0, 4, 'csörög'),
+    (9, 9, NOW(), 'BEERKEZETT', 1, 0, 0, 0, 3, 'nem jó'),
+    (10, 10, NOW(), 'BEERKEZETT', 0, 1, 1, 1, 2, 'jó, csak nem fúr');

@@ -7,7 +7,7 @@ VALUES (1, 'admin@example.com', '$2a$10$Ar51WbSfXjl2DSd.RynIwOAMTC2QKXpD4T6CLSfv
         '+36301234567', 'Szervizes', 1, 1),
        (4, 'wiskeys@gmail.com', '$2a$10$JHrenr4hYMegLO9uUIbIseYMHAXLPx3tqm8OuIIza5qGG19sWk9Zy', 'László Péter',
         '+36301234567', 'Szervizes', 1, 1),
-       (5, 'nikdikktanuloszoba@gmail.com', '$2a$10$Ar51WbSfXjl2DSd.RynIwOAMTC2QKXpD4T6CLSfvMGPbNQLx.9B1a', 'Minta Szervizes',
+       (5, 'proba3@gmail.com', '$2a$10$Ar51WbSfXjl2DSd.RynIwOAMTC2QKXpD4T6CLSfvMGPbNQLx.9B1a', 'Minta Szervizes',
         '+36301234567', 'TEST', 1, 1) ON DUPLICATE KEY
 UPDATE
     email =

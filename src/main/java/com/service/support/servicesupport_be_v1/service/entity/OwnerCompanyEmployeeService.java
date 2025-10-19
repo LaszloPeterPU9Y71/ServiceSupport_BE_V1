@@ -2,6 +2,7 @@ package com.service.support.servicesupport_be_v1.service.entity;
 
 
 import com.service.support.servicesupport_be_v1.exception.ResourceNotFoundException;
+import com.service.support.servicesupport_be_v1.mapper.OwnerCompanyEmployeeMapper;
 import com.service.support.servicesupport_be_v1.persistance.entity.OwnerCompanyEmployeeEntity;
 import com.service.support.servicesupport_be_v1.persistance.repository.OwnerCompanyEmployeeRepository;
 import com.service.support.servicesupport_be_v1.persistance.repository.OwnerCompanyRepository;
@@ -13,14 +14,18 @@ import java.util.List;
 @Service
 public class OwnerCompanyEmployeeService {
 
+
     private final OwnerCompanyEmployeeRepository repository;
     private final OwnerCompanyRepository ownerCompanyRepository;
     private final OwnerCompanyService ownerCompanyService;
+    private final OwnerCompanyEmployeeMapper mapper;
 
-    public OwnerCompanyEmployeeService(OwnerCompanyEmployeeRepository repository, OwnerCompanyRepository ownerCompanyRepository, OwnerCompanyService ownerCompanyService) {
+
+    public OwnerCompanyEmployeeService(OwnerCompanyEmployeeRepository repository, OwnerCompanyRepository ownerCompanyRepository, OwnerCompanyService ownerCompanyService, OwnerCompanyEmployeeMapper mapper) {
         this.repository = repository;
         this.ownerCompanyRepository = ownerCompanyRepository;
         this.ownerCompanyService = ownerCompanyService;
+        this.mapper = mapper;
     }
 
     public List<OwnerCompanyEmployeeEntity> findAll() {
@@ -32,8 +37,10 @@ public class OwnerCompanyEmployeeService {
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id " + id));
     }
 
-    public OwnerCompanyEmployeeEntity create(OwnerCompanyEmployeeEntity entity) {
-        return repository.save(entity);
+    public OwnerCompanyEmployeeEntity create(OwnerCompanyEmployee dto) {
+        OwnerCompanyEmployeeEntity result = mapper.toEntity(dto);
+        result.setOwnerCompany(ownerCompanyService.findByName(dto.getOwnerCompanyName()));
+        return repository.save(result);
     }
 
     public OwnerCompanyEmployeeEntity update(Long id, OwnerCompanyEmployee updated) {
@@ -43,8 +50,8 @@ public class OwnerCompanyEmployeeService {
         if (updated.getEmail() != null) existing.setEmail(updated.getEmail());
         if (updated.getTelNum() != null) existing.setTelNum(updated.getTelNum());
         if (updated.getTitle() != null) existing.setTitle(updated.getTitle());
-        if (updated.getOwnerCompanyId() != null)
-            existing.setOwnerCompany(ownerCompanyService.findById(updated.getOwnerCompanyId().longValue()));
+        if (updated.getOwnerCompanyName() != null)
+            existing.setOwnerCompany(ownerCompanyService.findByName(updated.getOwnerCompanyName()));
         else
             existing.setOwnerCompany(null);
 
