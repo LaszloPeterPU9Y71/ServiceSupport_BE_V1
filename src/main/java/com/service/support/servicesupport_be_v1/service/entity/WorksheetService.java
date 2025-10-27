@@ -10,6 +10,7 @@ import com.service.support.servicesupport_be_v1.persistance.repository.SparePart
 import com.service.support.servicesupport_be_v1.persistance.repository.WorksheetRepository;
 import com.service.support.servicesupport_be_v1.persistance.repository.WorksheetSparePartsRepository;
 import com.service.support.servicesupport_be_v1.web.model.*;
+import com.service.support.servicesupport_be_v1.web.model.WorksheetStatus;
 import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

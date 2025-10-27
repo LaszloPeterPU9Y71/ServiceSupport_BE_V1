@@ -3,6 +3,7 @@ package com.service.support.servicesupport_be_v1.persistance.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import javax.management.relation.Role;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,7 @@ public class UserEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private List<RoleEntity> roles = new ArrayList<>();
+
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;

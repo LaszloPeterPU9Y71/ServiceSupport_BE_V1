@@ -2,6 +2,7 @@ package com.service.support.servicesupport_be_v1.service.entity;
 
 import com.service.support.servicesupport_be_v1.exception.EmailSendException;
 import com.service.support.servicesupport_be_v1.exception.ResourceNotFoundException;
+import com.service.support.servicesupport_be_v1.mapper.RoleMapper;
 import com.service.support.servicesupport_be_v1.mapper.UserMapper;
 import com.service.support.servicesupport_be_v1.persistance.entity.PasswordResetTokenEntity;
 import com.service.support.servicesupport_be_v1.persistance.entity.RoleEntity;
@@ -19,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -72,6 +74,8 @@ public class UserService {
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new IllegalArgumentException("Email already registered");
         }
+
+
 
         UserEntity entity = UserEntity.builder()
                 .fullName(request.getFullName())

@@ -18,7 +18,7 @@ import jakarta.annotation.Generated;
  * OwnerCompanyEmployee
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-17T20:54:47.397666300+02:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-21T20:52:41.212096500+02:00[Europe/Budapest]")
 public class OwnerCompanyEmployee {
 
   private Integer id;
@@ -143,7 +143,7 @@ public class OwnerCompanyEmployee {
    * @return ownerCompanyName
   */
   
-  @Schema(name = "ownerCompanyName", example = "Jóska Kft", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @Schema(name = "ownerCompanyName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("ownerCompanyName")
   public String getOwnerCompanyName() {
     return ownerCompanyName;

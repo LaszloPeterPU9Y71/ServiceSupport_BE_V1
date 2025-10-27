@@ -4,6 +4,9 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
@@ -18,7 +21,7 @@ import jakarta.annotation.Generated;
  * RegisterUserRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-17T20:54:47.397666300+02:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-21T20:52:41.212096500+02:00[Europe/Budapest]")
 public class RegisterUserRequest {
 
   private String fullName;
@@ -30,6 +33,9 @@ public class RegisterUserRequest {
   private String password;
 
   private String position;
+
+  @Valid
+  private List<String> roles;
 
   public RegisterUserRequest() {
     super();
@@ -144,6 +150,34 @@ public class RegisterUserRequest {
     this.position = position;
   }
 
+  public RegisterUserRequest roles(List<String> roles) {
+    this.roles = roles;
+    return this;
+  }
+
+  public RegisterUserRequest addRolesItem(String rolesItem) {
+    if (this.roles == null) {
+      this.roles = new ArrayList<>();
+    }
+    this.roles.add(rolesItem);
+    return this;
+  }
+
+  /**
+   * Get roles
+   * @return roles
+  */
+  
+  @Schema(name = "roles", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("roles")
+  public List<String> getRoles() {
+    return roles;
+  }
+
+  public void setRoles(List<String> roles) {
+    this.roles = roles;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -157,12 +191,13 @@ public class RegisterUserRequest {
         Objects.equals(this.phoneNumber, registerUserRequest.phoneNumber) &&
         Objects.equals(this.email, registerUserRequest.email) &&
         Objects.equals(this.password, registerUserRequest.password) &&
-        Objects.equals(this.position, registerUserRequest.position);
+        Objects.equals(this.position, registerUserRequest.position) &&
+        Objects.equals(this.roles, registerUserRequest.roles);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(fullName, phoneNumber, email, password, position);
+    return Objects.hash(fullName, phoneNumber, email, password, position, roles);
   }
 
   @Override
@@ -174,6 +209,7 @@ public class RegisterUserRequest {
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("    position: ").append(toIndentedString(position)).append("\n");
+    sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
     sb.append("}");
     return sb.toString();
   }

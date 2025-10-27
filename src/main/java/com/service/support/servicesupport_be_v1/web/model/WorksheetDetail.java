@@ -30,7 +30,7 @@ import jakarta.annotation.Generated;
  * WorksheetDetail
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-17T20:54:47.397666300+02:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-21T20:52:41.212096500+02:00[Europe/Budapest]")
 public class WorksheetDetail {
 
   private Long worksheetId;
