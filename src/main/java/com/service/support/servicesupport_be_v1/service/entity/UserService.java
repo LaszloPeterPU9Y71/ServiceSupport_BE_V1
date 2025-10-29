@@ -20,10 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -35,6 +32,7 @@ public class UserService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder; // @Bean BCryptPasswordEncoder
     private final EmailingService emailingService;
+    private final RoleService roleService;
 
     public List<User> getAllUsers() {
         return userMapper.toDtoList(userRepository.findAll());
@@ -75,6 +73,12 @@ public class UserService {
             throw new IllegalArgumentException("Email already registered");
         }
 
+        var roles = new ArrayList<RoleEntity>();
+
+        for (var role : request.getRoles()) {
+            roles.add(roleService.findByName(role));
+
+        }
 
 
         UserEntity entity = UserEntity.builder()
@@ -84,6 +88,7 @@ public class UserService {
                 .passwordHash(passwordEncoder.encode(request.getPassword()))
                 .position(request.getPosition())
                 .enabled(true)
+                .roles(roles)
                 .build();
 
         UserEntity saved = userRepository.save(entity);

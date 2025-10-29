@@ -20,10 +20,12 @@ import jakarta.annotation.Generated;
  * WorksheetListDto
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-21T20:52:41.212096500+02:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-29T19:08:40.422899500+01:00[Europe/Budapest]")
 public class WorksheetListDto {
 
   private Long worksheetId;
+
+  private String customId;
 
   private Long toolId;
 
@@ -57,6 +59,26 @@ public class WorksheetListDto {
 
   public void setWorksheetId(Long worksheetId) {
     this.worksheetId = worksheetId;
+  }
+
+  public WorksheetListDto customId(String customId) {
+    this.customId = customId;
+    return this;
+  }
+
+  /**
+   * Get customId
+   * @return customId
+  */
+  
+  @Schema(name = "customId", example = "2501/1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("customId")
+  public String getCustomId() {
+    return customId;
+  }
+
+  public void setCustomId(String customId) {
+    this.customId = customId;
   }
 
   public WorksheetListDto toolId(Long toolId) {
@@ -209,6 +231,7 @@ public class WorksheetListDto {
     }
     WorksheetListDto worksheetListDto = (WorksheetListDto) o;
     return Objects.equals(this.worksheetId, worksheetListDto.worksheetId) &&
+        Objects.equals(this.customId, worksheetListDto.customId) &&
         Objects.equals(this.toolId, worksheetListDto.toolId) &&
         Objects.equals(this.toolItemNumber, worksheetListDto.toolItemNumber) &&
         Objects.equals(this.toolSerialNumber, worksheetListDto.toolSerialNumber) &&
@@ -220,7 +243,7 @@ public class WorksheetListDto {
 
   @Override
   public int hashCode() {
-    return Objects.hash(worksheetId, toolId, toolItemNumber, toolSerialNumber, ownerCompanyName, ownerCompanyEmployeeName, assignedUserFullName, status);
+    return Objects.hash(worksheetId, customId, toolId, toolItemNumber, toolSerialNumber, ownerCompanyName, ownerCompanyEmployeeName, assignedUserFullName, status);
   }
 
   @Override
@@ -228,6 +251,7 @@ public class WorksheetListDto {
     StringBuilder sb = new StringBuilder();
     sb.append("class WorksheetListDto {\n");
     sb.append("    worksheetId: ").append(toIndentedString(worksheetId)).append("\n");
+    sb.append("    customId: ").append(toIndentedString(customId)).append("\n");
     sb.append("    toolId: ").append(toIndentedString(toolId)).append("\n");
     sb.append("    toolItemNumber: ").append(toIndentedString(toolItemNumber)).append("\n");
     sb.append("    toolSerialNumber: ").append(toIndentedString(toolSerialNumber)).append("\n");

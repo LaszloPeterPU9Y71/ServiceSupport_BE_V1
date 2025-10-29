@@ -19,7 +19,7 @@ import jakarta.annotation.Generated;
  * SparePartUsage
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-21T20:52:41.212096500+02:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-29T19:08:40.422899500+01:00[Europe/Budapest]")
 public class SparePartUsage {
 
   private SparePart sparePart;

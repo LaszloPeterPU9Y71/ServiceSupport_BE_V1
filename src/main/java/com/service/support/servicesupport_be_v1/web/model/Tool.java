@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.service.support.servicesupport_be_v1.web.model.OwnerCompanyEmployee;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
@@ -18,7 +19,7 @@ import jakarta.annotation.Generated;
  * Tool
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-21T20:52:41.212096500+02:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-29T19:08:40.422899500+01:00[Europe/Budapest]")
 public class Tool {
 
   private Integer id;
@@ -32,6 +33,8 @@ public class Tool {
   private String serialNumber;
 
   private String typeNumber;
+
+  private OwnerCompanyEmployee owner;
 
   private String ownerName;
 
@@ -157,17 +160,37 @@ public class Tool {
     this.typeNumber = typeNumber;
   }
 
+  public Tool owner(OwnerCompanyEmployee owner) {
+    this.owner = owner;
+    return this;
+  }
+
+  /**
+   * Get owner
+   * @return owner
+  */
+  @Valid 
+  @Schema(name = "owner", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("owner")
+  public OwnerCompanyEmployee getOwner() {
+    return owner;
+  }
+
+  public void setOwner(OwnerCompanyEmployee owner) {
+    this.owner = owner;
+  }
+
   public Tool ownerName(String ownerName) {
     this.ownerName = ownerName;
     return this;
   }
 
   /**
-   * Az ügyfél neve (owner_company_employee.name)
+   * Az ügyfél neve (kényelmi mező lista nézethez)
    * @return ownerName
   */
   
-  @Schema(name = "ownerName", example = "Kiss János", description = "Az ügyfél neve (owner_company_employee.name)", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @Schema(name = "ownerName", accessMode = Schema.AccessMode.READ_ONLY, example = "Kiss János", description = "Az ügyfél neve (kényelmi mező lista nézethez)", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("ownerName")
   public String getOwnerName() {
     return ownerName;
@@ -183,11 +206,11 @@ public class Tool {
   }
 
   /**
-   * Az ügyfél cégének neve (ha van, különben üresen marad)
+   * Az ügyfél cégének neve lista nézethez
    * @return ownerCompanyName
   */
   
-  @Schema(name = "ownerCompanyName", example = "Szerszám Kuckó Kft.", description = "Az ügyfél cégének neve (ha van, különben üresen marad)", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @Schema(name = "ownerCompanyName", accessMode = Schema.AccessMode.READ_ONLY, example = "Szerszám Kuckó Kft.", description = "Az ügyfél cégének neve lista nézethez", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("ownerCompanyName")
   public String getOwnerCompanyName() {
     return ownerCompanyName;
@@ -212,13 +235,14 @@ public class Tool {
         Objects.equals(this.name, tool.name) &&
         Objects.equals(this.serialNumber, tool.serialNumber) &&
         Objects.equals(this.typeNumber, tool.typeNumber) &&
+        Objects.equals(this.owner, tool.owner) &&
         Objects.equals(this.ownerName, tool.ownerName) &&
         Objects.equals(this.ownerCompanyName, tool.ownerCompanyName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, toolId, itemNumber, name, serialNumber, typeNumber, ownerName, ownerCompanyName);
+    return Objects.hash(id, toolId, itemNumber, name, serialNumber, typeNumber, owner, ownerName, ownerCompanyName);
   }
 
   @Override
@@ -231,6 +255,7 @@ public class Tool {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    serialNumber: ").append(toIndentedString(serialNumber)).append("\n");
     sb.append("    typeNumber: ").append(toIndentedString(typeNumber)).append("\n");
+    sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
     sb.append("    ownerName: ").append(toIndentedString(ownerName)).append("\n");
     sb.append("    ownerCompanyName: ").append(toIndentedString(ownerCompanyName)).append("\n");
     sb.append("}");

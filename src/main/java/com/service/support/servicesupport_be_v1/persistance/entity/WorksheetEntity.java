@@ -25,9 +25,13 @@ public class WorksheetEntity {
     @Column(name = "worksheet_id", nullable = false)
     private Long worksheetId;
 
+    @Column(name = "custom_id")
+    private String customId;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tool_id", nullable = false)
     private ToolEntity tool;
+
 
     @Column(name = "is_warranty", nullable = false)
     private boolean warranty;

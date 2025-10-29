@@ -21,6 +21,6 @@ public class DefectEntity {
     @Column(name = "defect_name", length = 255, nullable = false, unique = true)
     private String name;
 
-  //  @ManyToMany(mappedBy = "defects")
- //  private List<WorksheetEntity> worksheets = new ArrayList<>();
+    @ManyToMany(mappedBy = "defects")
+    private List<WorksheetEntity> worksheets = new ArrayList<>();
 }

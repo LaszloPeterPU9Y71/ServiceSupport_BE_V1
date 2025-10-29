@@ -16,6 +16,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -270,8 +271,18 @@ public class WorksheetService {
     @Transactional
     public WorksheetEntity createWorksheet(WorksheetCreateRequest worksheetCreateRequest) {
 
+        LocalDate today = LocalDate.now();
+        int year = today.getYear() % 100; // utolsó 2 számjegy
+        int month = today.getMonthValue();
+
+        String prefix = String.format("%02d%02d/", year, month);
+
+        long recordsInMonth = worksheetRepository.countByCustomIdStartingWith(prefix);
+
+
         WorksheetEntity worksheet = WorksheetEntity.builder()
                 .assignedUser(userService.findById(worksheetCreateRequest.getAssignee()))
+                .customId(prefix+(recordsInMonth+1))
                 .hasInvoiceCopy(worksheetCreateRequest.getHasInvoiceCopy())
                 .hasRegistrationProof(worksheetCreateRequest.getHasRegistrationProof())
                 .hasWarrantyCard(worksheetCreateRequest.getHasWarrantyCard())

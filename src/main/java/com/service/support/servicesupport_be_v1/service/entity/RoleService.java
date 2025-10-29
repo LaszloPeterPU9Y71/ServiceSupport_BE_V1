@@ -16,4 +16,8 @@ public class RoleService {
     public List<RoleEntity> findAll() {
         return roleRepository.findAll();
     }
+
+    public RoleEntity findByName(String name) {
+        return roleRepository.findByName(name).orElseThrow(() -> new RuntimeException("Role with name " + name + " not found"));
+    }
 }

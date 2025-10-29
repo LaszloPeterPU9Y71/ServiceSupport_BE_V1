@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface WorksheetRepository extends JpaRepository<WorksheetEntity, Long> {
 
     Optional<WorksheetEntity> findWithDetailsByWorksheetId(Long worksheetId);
-
+    long countByCustomIdStartingWith(String prefix);
 }

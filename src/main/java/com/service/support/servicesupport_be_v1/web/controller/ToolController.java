@@ -45,7 +45,7 @@ public class ToolController implements ToolApi {
 
     @Override
     public ResponseEntity<Tool> toolsPost(Tool tool) {
-        ToolEntity saved = service.create(mapper.toEntity(tool));
+        ToolEntity saved = service.create(tool);
         return ResponseEntity.status(201).body(mapper.toDto(saved));
     }
 

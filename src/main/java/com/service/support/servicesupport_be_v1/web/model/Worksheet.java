@@ -20,10 +20,12 @@ import jakarta.annotation.Generated;
  * Worksheet
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-21T20:52:41.212096500+02:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-29T19:08:40.422899500+01:00[Europe/Budapest]")
 public class Worksheet {
 
   private Integer id;
+
+  private String customId;
 
   private Integer toolId;
 
@@ -67,6 +69,26 @@ public class Worksheet {
 
   public void setId(Integer id) {
     this.id = id;
+  }
+
+  public Worksheet customId(String customId) {
+    this.customId = customId;
+    return this;
+  }
+
+  /**
+   * Get customId
+   * @return customId
+  */
+  
+  @Schema(name = "customId", example = "2501/1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("customId")
+  public String getCustomId() {
+    return customId;
+  }
+
+  public void setCustomId(String customId) {
+    this.customId = customId;
   }
 
   public Worksheet toolId(Integer toolId) {
@@ -199,6 +221,7 @@ public class Worksheet {
     }
     Worksheet worksheet = (Worksheet) o;
     return Objects.equals(this.id, worksheet.id) &&
+        Objects.equals(this.customId, worksheet.customId) &&
         Objects.equals(this.toolId, worksheet.toolId) &&
         Objects.equals(this.isWarranty, worksheet.isWarranty) &&
         Objects.equals(this.hasWarrantyCard, worksheet.hasWarrantyCard) &&
@@ -209,7 +232,7 @@ public class Worksheet {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, toolId, isWarranty, hasWarrantyCard, hasInvoiceCopy, hasRegistrationProof, createdAt);
+    return Objects.hash(id, customId, toolId, isWarranty, hasWarrantyCard, hasInvoiceCopy, hasRegistrationProof, createdAt);
   }
 
   @Override
@@ -217,6 +240,7 @@ public class Worksheet {
     StringBuilder sb = new StringBuilder();
     sb.append("class Worksheet {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    customId: ").append(toIndentedString(customId)).append("\n");
     sb.append("    toolId: ").append(toIndentedString(toolId)).append("\n");
     sb.append("    isWarranty: ").append(toIndentedString(isWarranty)).append("\n");
     sb.append("    hasWarrantyCard: ").append(toIndentedString(hasWarrantyCard)).append("\n");
