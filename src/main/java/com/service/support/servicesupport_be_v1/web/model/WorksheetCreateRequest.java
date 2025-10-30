@@ -5,6 +5,10 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.service.support.servicesupport_be_v1.web.model.WorksheetNote;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
@@ -19,8 +23,14 @@ import jakarta.annotation.Generated;
  * WorksheetCreateRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-29T19:08:40.422899500+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-30T22:18:23.181631200+01:00[Europe/Budapest]")
 public class WorksheetCreateRequest {
+
+  @Valid
+  private List<@Valid WorksheetNote> notes = new ArrayList<>();
+
+  @Valid
+  private List<Integer> defectIds;
 
   private Integer toolId;
 
@@ -92,7 +102,8 @@ public class WorksheetCreateRequest {
   /**
    * Constructor with only required parameters
    */
-  public WorksheetCreateRequest(Integer toolId, Boolean isWarranty, Boolean hasWarrantyCard, Boolean hasInvoiceCopy, Boolean hasRegistrationProof, Integer assignee, StatusEnum status) {
+  public WorksheetCreateRequest(List<@Valid WorksheetNote> notes, Integer toolId, Boolean isWarranty, Boolean hasWarrantyCard, Boolean hasInvoiceCopy, Boolean hasRegistrationProof, Integer assignee, StatusEnum status) {
+    this.notes = notes;
     this.toolId = toolId;
     this.isWarranty = isWarranty;
     this.hasWarrantyCard = hasWarrantyCard;
@@ -100,6 +111,62 @@ public class WorksheetCreateRequest {
     this.hasRegistrationProof = hasRegistrationProof;
     this.assignee = assignee;
     this.status = status;
+  }
+
+  public WorksheetCreateRequest notes(List<@Valid WorksheetNote> notes) {
+    this.notes = notes;
+    return this;
+  }
+
+  public WorksheetCreateRequest addNotesItem(WorksheetNote notesItem) {
+    if (this.notes == null) {
+      this.notes = new ArrayList<>();
+    }
+    this.notes.add(notesItem);
+    return this;
+  }
+
+  /**
+   * Get notes
+   * @return notes
+  */
+  @NotNull @Valid 
+  @Schema(name = "notes", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("notes")
+  public List<@Valid WorksheetNote> getNotes() {
+    return notes;
+  }
+
+  public void setNotes(List<@Valid WorksheetNote> notes) {
+    this.notes = notes;
+  }
+
+  public WorksheetCreateRequest defectIds(List<Integer> defectIds) {
+    this.defectIds = defectIds;
+    return this;
+  }
+
+  public WorksheetCreateRequest addDefectIdsItem(Integer defectIdsItem) {
+    if (this.defectIds == null) {
+      this.defectIds = new ArrayList<>();
+    }
+    this.defectIds.add(defectIdsItem);
+    return this;
+  }
+
+  /**
+   * A hibák azonosítói
+   * @return defectIds
+  */
+  
+  @Schema(name = "defectIds", description = "A hibák azonosítói", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("defectIds")
+  public List<Integer> getDefectIds() {
+    return defectIds;
+  }
+
+  public void setDefectIds(List<Integer> defectIds) {
+    this.defectIds = defectIds;
   }
 
   public WorksheetCreateRequest toolId(Integer toolId) {
@@ -271,7 +338,9 @@ public class WorksheetCreateRequest {
       return false;
     }
     WorksheetCreateRequest worksheetCreateRequest = (WorksheetCreateRequest) o;
-    return Objects.equals(this.toolId, worksheetCreateRequest.toolId) &&
+    return Objects.equals(this.notes, worksheetCreateRequest.notes) &&
+        Objects.equals(this.defectIds, worksheetCreateRequest.defectIds) &&
+        Objects.equals(this.toolId, worksheetCreateRequest.toolId) &&
         Objects.equals(this.isWarranty, worksheetCreateRequest.isWarranty) &&
         Objects.equals(this.hasWarrantyCard, worksheetCreateRequest.hasWarrantyCard) &&
         Objects.equals(this.hasInvoiceCopy, worksheetCreateRequest.hasInvoiceCopy) &&
@@ -283,13 +352,15 @@ public class WorksheetCreateRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(toolId, isWarranty, hasWarrantyCard, hasInvoiceCopy, hasRegistrationProof, ownerDescription, assignee, status);
+    return Objects.hash(notes, defectIds, toolId, isWarranty, hasWarrantyCard, hasInvoiceCopy, hasRegistrationProof, ownerDescription, assignee, status);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class WorksheetCreateRequest {\n");
+    sb.append("    notes: ").append(toIndentedString(notes)).append("\n");
+    sb.append("    defectIds: ").append(toIndentedString(defectIds)).append("\n");
     sb.append("    toolId: ").append(toIndentedString(toolId)).append("\n");
     sb.append("    isWarranty: ").append(toIndentedString(isWarranty)).append("\n");
     sb.append("    hasWarrantyCard: ").append(toIndentedString(hasWarrantyCard)).append("\n");

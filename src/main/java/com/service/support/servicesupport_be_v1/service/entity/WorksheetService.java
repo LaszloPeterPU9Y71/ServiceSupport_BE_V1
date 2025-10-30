@@ -18,10 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,6 +34,7 @@ public class WorksheetService {
     private final SparePartsRepository sparePartRepository;
     private final UserService userService;
     private final ToolService toolService;
+    private final DefectService defectService;
 
 
     public List<WorksheetEntity> getAllWorksheets() {
@@ -235,7 +233,7 @@ public class WorksheetService {
                     usageEntity.setQuantity(newUsage.getQuantity());
                     usageEntity.setWorksheet(worksheet);
                     worksheet.getWorksheetSpareParts().add(usageEntity);
-                    changes.append("Új SparePart hozzáadva: ")
+                    changes.append("Új alkatrész hozzáadva: ")
                             .append(partId).append(" mennyiség: ").append(newUsage.getQuantity()).append("\n");
                 }
             }
@@ -270,19 +268,24 @@ public class WorksheetService {
 
     @Transactional
     public WorksheetEntity createWorksheet(WorksheetCreateRequest worksheetCreateRequest) {
-
         LocalDate today = LocalDate.now();
-        int year = today.getYear() % 100; // utolsó 2 számjegy
+        int year = today.getYear() % 100;
         int month = today.getMonthValue();
 
         String prefix = String.format("%02d%02d/", year, month);
-
         long recordsInMonth = worksheetRepository.countByCustomIdStartingWith(prefix);
 
-
         WorksheetEntity worksheet = WorksheetEntity.builder()
+                .defects(
+                        defectRepository.findAllById(
+                                worksheetCreateRequest.getDefectIds()
+                                        .stream()
+                                        .map(Long::valueOf)
+                                        .toList()
+                        )
+                )
                 .assignedUser(userService.findById(worksheetCreateRequest.getAssignee()))
-                .customId(prefix+(recordsInMonth+1))
+                .customId(prefix + (recordsInMonth + 1))
                 .hasInvoiceCopy(worksheetCreateRequest.getHasInvoiceCopy())
                 .hasRegistrationProof(worksheetCreateRequest.getHasRegistrationProof())
                 .hasWarrantyCard(worksheetCreateRequest.getHasWarrantyCard())
@@ -290,8 +293,8 @@ public class WorksheetService {
                 .ownerDescription(worksheetCreateRequest.getOwnerDescription())
                 .status(WorksheetStatus.valueOf(worksheetCreateRequest.getStatus().toString()))
                 .tool(toolService.findById(worksheetCreateRequest.getToolId().longValue()))
-
                 .build();
+
         worksheetRepository.save(worksheet);
         return worksheet;
     }

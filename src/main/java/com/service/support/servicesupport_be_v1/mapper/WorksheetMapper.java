@@ -37,6 +37,7 @@ public interface WorksheetMapper {
     @Mapping(source = "tool.owner.ownerCompany.name", target = "ownerCompanyEmployeeName")
     @Mapping(source = "assignedUser.fullName", target = "assignedUserFullName")
     @Mapping(source = "status", target = "status")
+   // @Mapping(source = "defects", target = "defectIds")
     WorksheetListDto toListDto(WorksheetEntity entity);
 
 

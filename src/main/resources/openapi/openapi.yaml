@@ -1245,6 +1245,15 @@ components:
           type: string
         toolSerialNumber:
           type: string
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorksheetNote'
+        defectIds:
+          type: array
+          description: Hibák entitásai
+          items:
+            $ref: '#/components/schemas/Defect'
         ownerCompanyName:
           type: string
         ownerCompanyEmployeeName:
@@ -1470,6 +1479,8 @@ components:
     WorksheetCreateRequest:
       type: object
       required:
+        - notes
+        - defectsId
         - toolId
         - isWarranty
         - hasWarrantyCard
@@ -1478,6 +1489,15 @@ components:
         - status
         - assignee
       properties:
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorksheetNote'
+        defectIds:
+          type: array
+          description: A hibák azonosítói
+          items:
+            type: integer
         toolId:
           type: integer
           description: A gép azonosítója
