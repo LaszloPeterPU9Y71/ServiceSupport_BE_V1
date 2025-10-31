@@ -6,6 +6,7 @@ import com.service.support.servicesupport_be_v1.service.entity.OwnerCompanyServi
 import com.service.support.servicesupport_be_v1.web.api.OwnerCompanyApi;
 import com.service.support.servicesupport_be_v1.web.model.OwnerCompany;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,11 +23,13 @@ public class OwnerCompanyController implements OwnerCompanyApi {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<OwnerCompany>> ownerCompaniesGet() {
         return ResponseEntity.ok(mapper.toDtoList(service.findAll()));
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN_ROLE')")
     public ResponseEntity<Void> ownerCompaniesIdDelete(Integer id) {
         OwnerCompanyEntity entity = service.findById(id.longValue());
         service.deleteById(entity.getId());
@@ -34,12 +37,14 @@ public class OwnerCompanyController implements OwnerCompanyApi {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN_ROLE')")
     public ResponseEntity<OwnerCompany> ownerCompaniesIdGet(Integer id) {
         OwnerCompanyEntity entity = service.findById(id.longValue());
         return ResponseEntity.ok(mapper.toDto(entity));
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<OwnerCompany> ownerCompaniesIdPut(Integer id, OwnerCompany ownerCompany) {
         OwnerCompanyEntity existing = service.findById(id.longValue());
 
@@ -52,6 +57,7 @@ public class OwnerCompanyController implements OwnerCompanyApi {
 
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<OwnerCompany> ownerCompaniesPost(OwnerCompany ownerCompany) {
         OwnerCompanyEntity saved = service.save(mapper.toEntity(ownerCompany));
         return ResponseEntity.ok(mapper.toDto(saved));

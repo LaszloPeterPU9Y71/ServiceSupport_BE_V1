@@ -6,6 +6,7 @@ import com.service.support.servicesupport_be_v1.service.entity.SparePartsService
 import com.service.support.servicesupport_be_v1.web.api.SparePartApi;
 import com.service.support.servicesupport_be_v1.web.model.SparePart;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -24,23 +25,27 @@ public class SparePartsController implements SparePartApi {
 
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<SparePart> sparePartsIdGet(Integer id) {
         return ResponseEntity.ok(mapper.toDto(service.findById(id.longValue())));
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<SparePart> sparePartsPost(SparePart sparePart) {
         SparePartsEntity saved = service.create(mapper.toEntity(sparePart));
         return ResponseEntity.status(201).body(mapper.toDto(saved));
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<SparePart> sparePartsIdPut(Integer id, SparePart sparePart) {
         SparePartsEntity updated = service.update(id.longValue(), mapper.toEntity(sparePart));
         return ResponseEntity.ok(mapper.toDto(updated));
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<SparePart>> sparePartsGet(String name) {
         if (name != null && !name.isBlank()) {
             return ResponseEntity.ok(mapper.toDtoList(service.findByName(name)));
@@ -49,13 +54,10 @@ public class SparePartsController implements SparePartApi {
         }
     }
 
-
     @Override
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> sparePartsIdDelete(Integer id) {
         service.delete(id.longValue());
         return ResponseEntity.noContent().build();
     }
-
-
-
 }

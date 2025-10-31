@@ -32,7 +32,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-30T22:18:23.181631200+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-31T20:50:27.221031900+01:00[Europe/Budapest]")
 @Validated
 @Tag(name = "defect", description = "the defect API")
 public interface DefectApi {

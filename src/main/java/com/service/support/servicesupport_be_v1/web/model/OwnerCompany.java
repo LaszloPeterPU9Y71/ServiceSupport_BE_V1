@@ -18,7 +18,7 @@ import jakarta.annotation.Generated;
  * OwnerCompany
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-30T22:18:23.181631200+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-31T20:50:27.221031900+01:00[Europe/Budapest]")
 public class OwnerCompany {
 
   private Integer id;

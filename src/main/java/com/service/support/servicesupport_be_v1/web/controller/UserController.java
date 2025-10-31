@@ -5,6 +5,7 @@ import com.service.support.servicesupport_be_v1.web.api.UserApi;
 import com.service.support.servicesupport_be_v1.web.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +20,7 @@ public class UserController implements UserApi {
     private final UserService userService;
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<User> assignRole(Integer id, String roleName) {
         userService.assignRole(id.longValue(), roleName);
         User updated = userService.getAllUsers().stream()
@@ -29,7 +31,7 @@ public class UserController implements UserApi {
     }
 
     @Override
-    // @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> banUser(Integer id) {
         userService.banUser(id);
         return ResponseEntity.ok().build();
@@ -61,14 +63,14 @@ public class UserController implements UserApi {
     }
 
     @Override
-    //  @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
     @Override
-    // @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<MeResponse> getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -81,6 +83,7 @@ public class UserController implements UserApi {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<User> registerUser(RegisterUserRequest registerUserRequest) {
         User user = userService.registerUser(registerUserRequest);
         return ResponseEntity.ok(user);
@@ -89,20 +92,21 @@ public class UserController implements UserApi {
 
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<User> removeRole(Integer id, String roleName) {
         User updated = userService.removeRole(id.longValue(), roleName);
         return ResponseEntity.ok(updated);
     }
 
     @Override
-    // @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> setPassword(Integer id, SetPasswordRequest setPasswordRequest) {
         userService.setPassword(id.longValue(), setPasswordRequest.getPassword());
         return ResponseEntity.ok().build();
     }
 
     @Override
-    //  @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> unbanUser(Integer id) {
         userService.unbanUser(id);
         return ResponseEntity.ok().build();
