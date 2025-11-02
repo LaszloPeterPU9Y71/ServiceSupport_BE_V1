@@ -4,7 +4,7 @@ INSERT INTO owner_company_employee (owner_company_employee_id, owner_company_emp
                                            owner_company_employee)
 VALUES
 -- 1. employee, nincs owner company
-(1, 'kovacs.peter@gmail.com', 'Kovács Péter', '36201234567', 'Freelancer', NULL),
+(1, 'wiskeys@gmail.com', 'László Péter', '36201234567', 'Freelancer', NULL),
 (2, 'szabo.anna@yahoo.com', 'Szabó Anna', '36205551234', 'Designer', 3),
 (3, 'toth.marton@outlook.com', 'Tóth Márton', '36203334444', 'Developer', 7),
 (4, 'kiss.julia@gmail.com', 'Kiss Júlia', '36204445555', 'Freelancer', 9),

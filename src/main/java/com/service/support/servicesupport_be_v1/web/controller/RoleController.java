@@ -19,7 +19,6 @@ public class RoleController implements RoleApi {
     private final RoleMapper roleMapper;
 
     @Override
-    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<String>> getAllRoles() {
         return ResponseEntity.ok( roleMapper.toDtoList(roleService.findAll()));
 

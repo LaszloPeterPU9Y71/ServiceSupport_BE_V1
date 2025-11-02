@@ -5,12 +5,7 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.service.support.servicesupport_be_v1.web.model.Defect;
-import com.service.support.servicesupport_be_v1.web.model.WorksheetNote;
 import com.service.support.servicesupport_be_v1.web.model.WorksheetStatus;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
@@ -25,7 +20,7 @@ import jakarta.annotation.Generated;
  * WorksheetListDto
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-02T09:37:11.745453+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-02T13:08:35.356618100+01:00[Europe/Budapest]")
 public class WorksheetListDto {
 
   private Long worksheetId;
@@ -37,12 +32,6 @@ public class WorksheetListDto {
   private String toolItemNumber;
 
   private String toolSerialNumber;
-
-  @Valid
-  private List<@Valid WorksheetNote> notes;
-
-  @Valid
-  private List<@Valid Defect> defectIds;
 
   private String ownerCompanyName;
 
@@ -152,62 +141,6 @@ public class WorksheetListDto {
     this.toolSerialNumber = toolSerialNumber;
   }
 
-  public WorksheetListDto notes(List<@Valid WorksheetNote> notes) {
-    this.notes = notes;
-    return this;
-  }
-
-  public WorksheetListDto addNotesItem(WorksheetNote notesItem) {
-    if (this.notes == null) {
-      this.notes = new ArrayList<>();
-    }
-    this.notes.add(notesItem);
-    return this;
-  }
-
-  /**
-   * Get notes
-   * @return notes
-  */
-  @Valid 
-  @Schema(name = "notes", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("notes")
-  public List<@Valid WorksheetNote> getNotes() {
-    return notes;
-  }
-
-  public void setNotes(List<@Valid WorksheetNote> notes) {
-    this.notes = notes;
-  }
-
-  public WorksheetListDto defectIds(List<@Valid Defect> defectIds) {
-    this.defectIds = defectIds;
-    return this;
-  }
-
-  public WorksheetListDto addDefectIdsItem(Defect defectIdsItem) {
-    if (this.defectIds == null) {
-      this.defectIds = new ArrayList<>();
-    }
-    this.defectIds.add(defectIdsItem);
-    return this;
-  }
-
-  /**
-   * Hibák entitásai
-   * @return defectIds
-  */
-  @Valid 
-  @Schema(name = "defectIds", description = "Hibák entitásai", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("defectIds")
-  public List<@Valid Defect> getDefectIds() {
-    return defectIds;
-  }
-
-  public void setDefectIds(List<@Valid Defect> defectIds) {
-    this.defectIds = defectIds;
-  }
-
   public WorksheetListDto ownerCompanyName(String ownerCompanyName) {
     this.ownerCompanyName = ownerCompanyName;
     return this;
@@ -302,8 +235,6 @@ public class WorksheetListDto {
         Objects.equals(this.toolId, worksheetListDto.toolId) &&
         Objects.equals(this.toolItemNumber, worksheetListDto.toolItemNumber) &&
         Objects.equals(this.toolSerialNumber, worksheetListDto.toolSerialNumber) &&
-        Objects.equals(this.notes, worksheetListDto.notes) &&
-        Objects.equals(this.defectIds, worksheetListDto.defectIds) &&
         Objects.equals(this.ownerCompanyName, worksheetListDto.ownerCompanyName) &&
         Objects.equals(this.ownerCompanyEmployeeName, worksheetListDto.ownerCompanyEmployeeName) &&
         Objects.equals(this.assignedUserFullName, worksheetListDto.assignedUserFullName) &&
@@ -312,7 +243,7 @@ public class WorksheetListDto {
 
   @Override
   public int hashCode() {
-    return Objects.hash(worksheetId, customId, toolId, toolItemNumber, toolSerialNumber, notes, defectIds, ownerCompanyName, ownerCompanyEmployeeName, assignedUserFullName, status);
+    return Objects.hash(worksheetId, customId, toolId, toolItemNumber, toolSerialNumber, ownerCompanyName, ownerCompanyEmployeeName, assignedUserFullName, status);
   }
 
   @Override
@@ -324,8 +255,6 @@ public class WorksheetListDto {
     sb.append("    toolId: ").append(toIndentedString(toolId)).append("\n");
     sb.append("    toolItemNumber: ").append(toIndentedString(toolItemNumber)).append("\n");
     sb.append("    toolSerialNumber: ").append(toIndentedString(toolSerialNumber)).append("\n");
-    sb.append("    notes: ").append(toIndentedString(notes)).append("\n");
-    sb.append("    defectIds: ").append(toIndentedString(defectIds)).append("\n");
     sb.append("    ownerCompanyName: ").append(toIndentedString(ownerCompanyName)).append("\n");
     sb.append("    ownerCompanyEmployeeName: ").append(toIndentedString(ownerCompanyEmployeeName)).append("\n");
     sb.append("    assignedUserFullName: ").append(toIndentedString(assignedUserFullName)).append("\n");

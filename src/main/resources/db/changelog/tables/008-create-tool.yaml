@@ -15,11 +15,6 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: tool_id
-                  type: VARCHAR(255)
-                  constraints:
-                    nullable: false
-              - column:
                   name: tool_item_number
                   type: VARCHAR(255)
                   constraints:

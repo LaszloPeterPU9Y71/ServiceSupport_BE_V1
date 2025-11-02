@@ -19,9 +19,6 @@ public class WorkSheetController implements WorksheetApi {
     private final WorksheetService worksheetService;
     private final WorksheetMapper worksheetMapper;
 
-  // @PreAuthorize("isAuthenticated()")
-  //  @PreAuthorize("hasRole('ROLE_ADMIN')")
-
 
     @Override
     @PreAuthorize("isAuthenticated()")

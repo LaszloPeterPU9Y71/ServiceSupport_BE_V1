@@ -19,12 +19,10 @@ import jakarta.annotation.Generated;
  * Tool
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-02T09:37:11.745453+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-02T13:08:35.356618100+01:00[Europe/Budapest]")
 public class Tool {
 
   private Integer id;
-
-  private String toolId;
 
   private String itemNumber;
 
@@ -58,26 +56,6 @@ public class Tool {
 
   public void setId(Integer id) {
     this.id = id;
-  }
-
-  public Tool toolId(String toolId) {
-    this.toolId = toolId;
-    return this;
-  }
-
-  /**
-   * Get toolId
-   * @return toolId
-  */
-  
-  @Schema(name = "tool_id", example = "2025-10", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("tool_id")
-  public String getToolId() {
-    return toolId;
-  }
-
-  public void setToolId(String toolId) {
-    this.toolId = toolId;
   }
 
   public Tool itemNumber(String itemNumber) {
@@ -230,7 +208,6 @@ public class Tool {
     }
     Tool tool = (Tool) o;
     return Objects.equals(this.id, tool.id) &&
-        Objects.equals(this.toolId, tool.toolId) &&
         Objects.equals(this.itemNumber, tool.itemNumber) &&
         Objects.equals(this.name, tool.name) &&
         Objects.equals(this.serialNumber, tool.serialNumber) &&
@@ -242,7 +219,7 @@ public class Tool {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, toolId, itemNumber, name, serialNumber, typeNumber, owner, ownerName, ownerCompanyName);
+    return Objects.hash(id, itemNumber, name, serialNumber, typeNumber, owner, ownerName, ownerCompanyName);
   }
 
   @Override
@@ -250,7 +227,6 @@ public class Tool {
     StringBuilder sb = new StringBuilder();
     sb.append("class Tool {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    toolId: ").append(toIndentedString(toolId)).append("\n");
     sb.append("    itemNumber: ").append(toIndentedString(itemNumber)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    serialNumber: ").append(toIndentedString(serialNumber)).append("\n");

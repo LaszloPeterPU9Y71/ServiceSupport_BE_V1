@@ -1245,15 +1245,6 @@ components:
           type: string
         toolSerialNumber:
           type: string
-        notes:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorksheetNote'
-        defectIds:
-          type: array
-          description: Hibák entitásai
-          items:
-            $ref: '#/components/schemas/Defect'
         ownerCompanyName:
           type: string
         ownerCompanyEmployeeName:
@@ -1289,9 +1280,6 @@ components:
         id:
           type: integer
           example: 1
-        tool_id:
-          type: string
-          example: 2025-10
         itemNumber:
           type: string
           example: "ITM-001"

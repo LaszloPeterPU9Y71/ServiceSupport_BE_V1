@@ -54,7 +54,6 @@ public class ToolService {
         ToolEntity existing = findById(id);
 
         // egyszerű mezők frissítése
-        existing.setToolId(toolDto.getToolId() != null ? toolDto.getToolId() : existing.getToolId());
         existing.setName(toolDto.getName());
         existing.setItemNumber(toolDto.getItemNumber());
         existing.setSerialNumber(toolDto.getSerialNumber());

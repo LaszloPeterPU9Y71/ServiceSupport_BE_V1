@@ -5,10 +5,7 @@ import com.service.support.servicesupport_be_v1.exception.ResourceNotFoundExcept
 import com.service.support.servicesupport_be_v1.mapper.SparePartsMapper;
 import com.service.support.servicesupport_be_v1.mapper.WorksheetMapper;
 import com.service.support.servicesupport_be_v1.persistance.entity.*;
-import com.service.support.servicesupport_be_v1.persistance.repository.DefectRepository;
-import com.service.support.servicesupport_be_v1.persistance.repository.SparePartsRepository;
-import com.service.support.servicesupport_be_v1.persistance.repository.WorksheetRepository;
-import com.service.support.servicesupport_be_v1.persistance.repository.WorksheetSparePartsRepository;
+import com.service.support.servicesupport_be_v1.persistance.repository.*;
 import com.service.support.servicesupport_be_v1.web.model.*;
 import com.service.support.servicesupport_be_v1.web.model.WorksheetStatus;
 import jakarta.mail.MessagingException;
@@ -20,6 +17,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
+
+
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +33,8 @@ public class WorksheetService {
     private final SparePartsRepository sparePartRepository;
     private final UserService userService;
     private final ToolService toolService;
-    private final DefectService defectService;
+
+    Double VAT =  1.27;
 
 
     public List<WorksheetEntity> getAllWorksheets() {
@@ -98,6 +98,7 @@ public class WorksheetService {
 
     @Transactional
     public void updateWorksheet(Integer id, WorksheetUpdateRequest req) {
+
         WorksheetEntity worksheet = findById(id.longValue());
 
         StringBuilder changes = new StringBuilder("Munkalap változások:\n");
@@ -254,21 +255,109 @@ public class WorksheetService {
             }
         }
 
-        // --- Log + e-mail ---
+        StringBuilder html = new StringBuilder();
+
+        html.append("<h2>Munkalap részletei</h2>");
+        html.append("<table border='1' cellpadding='5' cellspacing='0' width='100%'>");
+
+// --- Alapadatok, hibák, jegyzetek ---
+        html.append("<tr><td>Munkalap azonosító</td><td>").append(worksheet.getCustomId()).append("</td></tr>")
+                .append("<tr><td>Státusz</td><td>").append(worksheet.getStatus()).append("</td></tr>")
+                .append("<tr><td>Felelős</td><td>").append(worksheet.getAssignedUser() != null ? worksheet.getAssignedUser().getFullName() : "N/A").append("</td></tr>")
+                .append("<tr><td>Garanciás</td><td>").append(worksheet.isWarranty() ? "Igen" : "Nem").append("</td></tr>")
+                .append("<tr><td>Számlamásolat</td><td>").append(worksheet.isHasInvoiceCopy() ? "Behozta" : "Nem hozta be").append("</td></tr>")
+                .append("<tr><td>Regisztrációs lap</td><td>").append(worksheet.isHasRegistrationProof() ? "Behozta" : "Nem hozta be").append("</td></tr>")
+                .append("<tr><td>Garancialevél</td><td>").append(worksheet.isHasWarrantyCard() ? "Behozta" : "Nem hozta be").append("</td></tr>")
+                .append("<tr><td>Hiba leírása</td><td>").append(worksheet.getOwnerDescription()).append("</td></tr>");
+
+// Hibák
+        html.append("<tr><td>Hibák</td><td>");
+        if (!worksheet.getDefects().isEmpty()) {
+            html.append("<ul>");
+            worksheet.getDefects().forEach(d -> html.append("<li>").append(d.getName()).append("</li>"));
+            html.append("</ul>");
+        } else {
+            html.append("Nincsenek hibák");
+        }
+        html.append("</td></tr>");
+
+// Jegyzetek
+        html.append("<tr><td>Megjegyzések</td><td>");
+        if (!worksheet.getNotes().isEmpty()) {
+            html.append("<ul>");
+            worksheet.getNotes().forEach(n -> {
+                String user = n.getUser() != null ? n.getUser().getFullName() : "N/A";
+                html.append("<li>").append(user).append(": ").append(n.getNoteText()).append("</li>");
+            });
+            html.append("</ul>");
+        } else {
+            html.append("Nincsenek jegyzetek");
+        }
+        html.append("</td></tr>");
+
+// --- Alkatrészek ---
+// Kitöltjük a teljes szélességet (colspan=2)
+        html.append("<tr><td colspan='2'>");
+        if (!worksheet.getWorksheetSpareParts().isEmpty()) {
+            html.append("<table border='1' cellpadding='3' cellspacing='0' width='100%'>")
+                    .append("<tr><th>Alkatrész neve</th><th>Mennyiség</th><th>Egységár</th><th>Összeg</th></tr>");
+            double totalPrice = 0.0;
+            for (WorksheetSparePartsEntity sp : worksheet.getWorksheetSpareParts()) {
+                String name = sp.getSparePart() != null ? sp.getSparePart().getItemName() : "N/A";
+                int quantity = sp.getQuantity() != 0? sp.getQuantity() : 0;
+                double unitPrice = sp.getSparePart() != null ? sp.getSparePart().getNettoSellingPrice() : 0.0;
+                double lineTotal = quantity * unitPrice;
+                totalPrice += lineTotal;
+
+                html.append("<tr>")
+                        .append("<td>").append(name).append("</td>")
+                        .append("<td>").append(quantity).append("</td>")
+                        .append("<td>").append(String.format("%.0f", unitPrice)).append(" Ft</td>")
+                        .append("<td>").append(String.format("%.0f", lineTotal)).append(" Ft</td>")
+                        .append("</tr>");
+            }
+
+            // Összesített ár
+            html.append("<tr>")
+                    .append("<td colspan='3'><strong>Összesen nettó</strong></td>")
+                    .append("<td><strong>").append(String.format("%.0f", totalPrice)).append(" Ft</strong></td>")
+                    .append("</tr>")
+                    .append("<tr>")
+                    .append("<td colspan='3'><strong>Összesen bruttó</strong></td>")
+                    .append("<td><strong>").append(String.format("%.0f", totalPrice * VAT)).append(" Ft</strong></td>")
+                    .append("</tr>");
+
+            html.append("</table>");
+        } else {
+            html.append("Nincsenek alkatrészek");
+        }
+        html.append("</td></tr>");
+
+        html.append("</table>");
+
+
+
+
+
+
         if (changes.length() > "Munkalap változások:\n".length()) {
-            mailingService.sendNotification(changes.toString());
+            mailingService.sendNotification(html.toString());
             try {
-                mailingService.sendHtmlEmail(worksheet.getTool().getOwner().getEmail(), "Módosítás történt", changes.toString());
+                mailingService.sendHtmlEmail(worksheet.getTool().getOwner().getEmail(), "Módosítás történt", html.toString());
             } catch (MessagingException e) {
                 throw new EmailSendException("Email küldés sikertelen", e);
             }
         }
 
+
         worksheetRepository.save(worksheet);
     }
 
+
+
     @Transactional
     public WorksheetEntity createWorksheet(WorksheetCreateRequest worksheetCreateRequest) {
+
         LocalDate today = LocalDate.now();
         int year = today.getYear() % 100;
         int month = today.getMonthValue();

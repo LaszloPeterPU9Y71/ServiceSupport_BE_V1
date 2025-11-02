@@ -15,9 +15,6 @@ public class ToolEntity {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "tool_id")
-    private String toolId;
-
     @Column(name = "tool_item_number", length = 255, nullable = false)
     private String itemNumber;
 
