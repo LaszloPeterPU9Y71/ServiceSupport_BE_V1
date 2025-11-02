@@ -4,6 +4,7 @@ package com.service.support.servicesupport_be_v1.service.entity;
 import com.service.support.servicesupport_be_v1.exception.ResourceNotFoundException;
 import com.service.support.servicesupport_be_v1.persistance.entity.OwnerCompanyEntity;
 import com.service.support.servicesupport_be_v1.persistance.repository.OwnerCompanyRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class OwnerCompanyService {
     }
 
     public List<OwnerCompanyEntity> findAll() {
-        return repository.findAll();
+        return repository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
     public OwnerCompanyEntity findById(Long id) {

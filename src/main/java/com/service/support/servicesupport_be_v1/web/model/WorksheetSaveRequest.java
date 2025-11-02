@@ -24,7 +24,7 @@ import jakarta.annotation.Generated;
  * WorksheetSaveRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-10-31T20:50:27.221031900+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-02T09:37:11.745453+01:00[Europe/Budapest]")
 public class WorksheetSaveRequest {
 
   private Integer toolId;

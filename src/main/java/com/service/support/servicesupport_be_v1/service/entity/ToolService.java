@@ -9,6 +9,7 @@ import com.service.support.servicesupport_be_v1.persistance.repository.UserRepos
 import com.service.support.servicesupport_be_v1.web.model.Tool;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,11 +23,11 @@ public class ToolService {
     private final ToolMapper mapper;
 
     public List<ToolEntity> findAll() {
-        return repository.findAll();
+        return repository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
     public List<Tool> findAllDto() {
-        return mapper.toDtoList(repository.findAll());
+        return mapper.toDtoList(repository.findAll(Sort.by(Sort.Direction.ASC, "name")));
     }
 
     public ToolEntity findById(Long id) {
@@ -42,15 +43,10 @@ public class ToolService {
             throw new IllegalArgumentException("Owner is required");
         }
 
-        // 🔹 tényleges lekérdezés az adatbázisból
         var owner = ownerCompanyEmployeeRepository
                 .findById(dto.getOwner().getId().longValue())
                 .orElseThrow(() -> new IllegalArgumentException("Owner not found: " + dto.getOwner().getId()));
-
-        // 🔹 beállítjuk a megtalált (managed) entitást
         entity.setOwner(owner);
-        entity.setToolId("random mező eldönteni hogy kell-e");
-        // 🔹 végül mentjük
         return repository.save(entity);
     }
 

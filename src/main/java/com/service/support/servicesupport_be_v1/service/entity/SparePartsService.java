@@ -4,6 +4,7 @@ import com.service.support.servicesupport_be_v1.exception.ResourceNotFoundExcept
 import com.service.support.servicesupport_be_v1.persistance.entity.SparePartsEntity;
 import com.service.support.servicesupport_be_v1.persistance.repository.SparePartsRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class SparePartsService {
 
 
     public List<SparePartsEntity> findAll() {
-        return repository.findAll();
+        return repository.findAll(Sort.by(Sort.Direction.ASC, "itemName"));
     }
 
     public SparePartsEntity findById(Long id) {

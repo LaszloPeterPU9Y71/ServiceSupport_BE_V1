@@ -7,6 +7,7 @@ import com.service.support.servicesupport_be_v1.persistance.entity.OwnerCompanyE
 import com.service.support.servicesupport_be_v1.persistance.repository.OwnerCompanyEmployeeRepository;
 import com.service.support.servicesupport_be_v1.persistance.repository.OwnerCompanyRepository;
 import com.service.support.servicesupport_be_v1.web.model.OwnerCompanyEmployee;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class OwnerCompanyEmployeeService {
     }
 
     public List<OwnerCompanyEmployeeEntity> findAll() {
-        return repository.findAll();
+        return repository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
     public OwnerCompanyEmployeeEntity findById(Long id) {

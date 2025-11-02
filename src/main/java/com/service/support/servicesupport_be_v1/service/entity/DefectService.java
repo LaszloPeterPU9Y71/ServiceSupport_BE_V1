@@ -3,6 +3,7 @@ package com.service.support.servicesupport_be_v1.service.entity;
 import com.service.support.servicesupport_be_v1.exception.ResourceNotFoundException;
 import com.service.support.servicesupport_be_v1.persistance.entity.DefectEntity;
 import com.service.support.servicesupport_be_v1.persistance.repository.DefectRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class DefectService {
     }
 
     public List<DefectEntity> findAll() {
-        return repository.findAll();
+        return repository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
     public DefectEntity findById(Long id) {

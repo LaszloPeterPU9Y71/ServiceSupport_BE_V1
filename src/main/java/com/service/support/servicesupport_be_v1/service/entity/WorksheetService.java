@@ -58,6 +58,7 @@ public class WorksheetService {
         List<WorksheetEntity> entities = worksheetRepository.findAll();
 
         return entities.stream()
+                .sorted(Comparator.comparing(WorksheetEntity::getWorksheetId).reversed())
                 .map(worksheetMapper::toListDto)
                 .collect(Collectors.toList());
     }
