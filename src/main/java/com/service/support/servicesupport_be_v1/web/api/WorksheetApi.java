@@ -37,7 +37,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-02T13:08:35.356618100+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-04T20:47:32.698171100+01:00[Europe/Budapest]")
 @Validated
 @Tag(name = "worksheet", description = "the worksheet API")
 public interface WorksheetApi {

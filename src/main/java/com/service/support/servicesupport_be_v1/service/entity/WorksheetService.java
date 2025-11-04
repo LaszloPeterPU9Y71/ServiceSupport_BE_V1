@@ -3,6 +3,7 @@ package com.service.support.servicesupport_be_v1.service.entity;
 import com.service.support.servicesupport_be_v1.exception.EmailSendException;
 import com.service.support.servicesupport_be_v1.exception.ResourceNotFoundException;
 import com.service.support.servicesupport_be_v1.mapper.SparePartsMapper;
+import com.service.support.servicesupport_be_v1.mapper.WorksheetEntityNotesMapper;
 import com.service.support.servicesupport_be_v1.mapper.WorksheetMapper;
 import com.service.support.servicesupport_be_v1.persistance.entity.*;
 import com.service.support.servicesupport_be_v1.persistance.repository.*;
@@ -33,6 +34,8 @@ public class WorksheetService {
     private final SparePartsRepository sparePartRepository;
     private final UserService userService;
     private final ToolService toolService;
+    private final WorksheetEntityNotesMapper worksheetEntityNotesMapper;
+    private final WorksheetNoteRepository worksheetNoteRepository;
 
     Double VAT =  1.27;
 
@@ -183,6 +186,7 @@ public class WorksheetService {
                     n.setWorksheet(worksheet);
                     worksheet.getNotes().add(n);
                     changes.append("Új note: ").append(newNote.getNoteText()).append("\n");
+                    worksheetNoteRepository.save(n);
                 } else if (currentNoteMap.containsKey(newNote.getNoteId())) {
                     WorksheetNoteEntity existing = currentNoteMap.get(newNote.getNoteId());
                     if (!Objects.equals(existing.getNoteText(), newNote.getNoteText())) {
@@ -340,7 +344,7 @@ public class WorksheetService {
 
 
 
-        if (changes.length() > "Munkalap változások:\n".length()) {
+        if (changes.length() > "Javítási munkalap változások - Szerszám Kuckó Kft\n".length()) {
             mailingService.sendNotification(html.toString());
             try {
                 mailingService.sendHtmlEmail(worksheet.getTool().getOwner().getEmail(), "Módosítás történt", html.toString());
@@ -386,6 +390,12 @@ public class WorksheetService {
                 .build();
 
         worksheetRepository.save(worksheet);
+        List<WorksheetNoteEntity> worksheetNoteEntities = new ArrayList<>();
+                for(var note : worksheetCreateRequest.getNotes()) {
+                    var NoteEntity = worksheetEntityNotesMapper.toEntity(note , worksheet);
+                    worksheetNoteEntities.add(NoteEntity);
+                }
+                worksheetNoteRepository.saveAll(worksheetNoteEntities);
         return worksheet;
     }
 }
