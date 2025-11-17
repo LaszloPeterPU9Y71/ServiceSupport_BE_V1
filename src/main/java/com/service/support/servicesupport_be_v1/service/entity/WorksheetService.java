@@ -271,8 +271,8 @@ public class WorksheetService {
                 .append("<tr><td>Garanciás</td><td>").append(worksheet.isWarranty() ? "Igen" : "Nem").append("</td></tr>")
                 .append("<tr><td>Számlamásolat</td><td>").append(worksheet.isHasInvoiceCopy() ? "Behozta" : "Nem hozta be").append("</td></tr>")
                 .append("<tr><td>Regisztrációs lap</td><td>").append(worksheet.isHasRegistrationProof() ? "Behozta" : "Nem hozta be").append("</td></tr>")
-                .append("<tr><td>Garancialevél</td><td>").append(worksheet.isHasWarrantyCard() ? "Behozta" : "Nem hozta be").append("</td></tr>")
-                .append("<tr><td>Hiba leírása</td><td>").append(worksheet.getOwnerDescription()).append("</td></tr>");
+                .append("<tr><td>Garancialevél</td><td>").append(worksheet.isHasWarrantyCard() ? "Behozta" : "Nem hozta be").append("</td></tr>");
+
 
 // Hibák
         html.append("<tr><td>Hibák</td><td>");
@@ -344,10 +344,10 @@ public class WorksheetService {
 
 
 
-        if (changes.length() > "Javítási munkalap változások - Szerszám Kuckó Kft\n".length()) {
+        if (changes.length() > "".length()) {
             mailingService.sendNotification(html.toString());
             try {
-                mailingService.sendHtmlEmail(worksheet.getTool().getOwner().getEmail(), "Módosítás történt", html.toString());
+                mailingService.sendHtmlEmail(worksheet.getTool().getOwner().getEmail(), "Javítási munkalap változások - Szerszám Kuckó Kft", html.toString());
             } catch (MessagingException e) {
                 throw new EmailSendException("Email küldés sikertelen", e);
             }

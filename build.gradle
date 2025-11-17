@@ -3,8 +3,8 @@ plugins {
     id 'org.springframework.boot' version '3.5.5'
     id 'io.spring.dependency-management' version '1.1.7'
     id("org.openapi.generator") version "7.3.0"
+    id 'com.google.cloud.tools.jib' version '3.4.0'
 }
-
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -18,6 +18,8 @@ java {
 
 repositories {
     mavenCentral()
+    gradlePluginPortal()
+    google()
 }
 
 dependencies {
@@ -97,13 +99,34 @@ tasks.named('openApiGenerate') {
 }
 
 tasks.register('copyGeneratedApi', Copy) {
-    dependsOn 'openApiGenerate' // ⚠️ ez a lényeg
+    dependsOn 'openApiGenerate'
     from "$buildDir/openapi-generated/src/main/java/com/service/support/servicesupport_be_v1/web"
     into "$projectDir/src/main/java/com/service/support/servicesupport_be_v1/web"
     include 'api/**', 'model/**'
 }
 
 tasks.named('compileJava') {
-    dependsOn 'copyGeneratedApi' // build előtt mindig generáljon + másoljon
+    dependsOn 'copyGeneratedApi'
 }
 
+jib {
+    from {
+        image = 'eclipse-temurin:24-jre'
+    }
+    to {
+        image = 'delano0b/servicesupport_be_v1'
+        tags = ['latest']
+        auth {
+            username = "delano0b"
+            password = "Festool51@"
+            // Használd inkább környezeti változóként:
+            // username = System.getenv("DOCKER_USERNAME")
+            // password = System.getenv("DOCKER_PASSWORD")
+        }
+    }
+    container {
+        ports = ['8080']
+        mainClass = 'com.service.support.servicesupport_be_v1.ServiceSupportBeV1Application'
+        jvmFlags = ['-Xms512m', '-Xmx512m']
+    }
+}
