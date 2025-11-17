@@ -267,7 +267,7 @@ public class WorksheetService {
 // --- Alapadatok, hibák, jegyzetek ---
         html.append("<tr><td>Munkalap azonosító</td><td>").append(worksheet.getCustomId()).append("</td></tr>")
                 .append("<tr><td>Státusz</td><td>").append(worksheet.getStatus()).append("</td></tr>")
-                .append("<tr><td>Felelős</td><td>").append(worksheet.getAssignedUser() != null ? worksheet.getAssignedUser().getFullName() : "N/A").append("</td></tr>")
+                .append("<tr><td>Szerelő</td><td>").append(worksheet.getAssignedUser() != null ? worksheet.getAssignedUser().getFullName() : "N/A").append("</td></tr>")
                 .append("<tr><td>Garanciás</td><td>").append(worksheet.isWarranty() ? "Igen" : "Nem").append("</td></tr>")
                 .append("<tr><td>Számlamásolat</td><td>").append(worksheet.isHasInvoiceCopy() ? "Behozta" : "Nem hozta be").append("</td></tr>")
                 .append("<tr><td>Regisztrációs lap</td><td>").append(worksheet.isHasRegistrationProof() ? "Behozta" : "Nem hozta be").append("</td></tr>")
