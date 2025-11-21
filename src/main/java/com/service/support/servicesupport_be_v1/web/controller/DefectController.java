@@ -27,6 +27,7 @@ public class DefectController implements DefectApi {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> defectsIdDelete(Integer id) {
         service.delete(id.longValue());
         return ResponseEntity.noContent().build();
