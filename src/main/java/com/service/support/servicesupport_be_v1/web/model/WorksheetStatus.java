@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * A munkalap státusza
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-19T09:21:19.884147+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-21T16:50:32.344231+01:00[Europe/Budapest]")
 public enum WorksheetStatus {
   
   BEERKEZETT("BEERKEZETT"),

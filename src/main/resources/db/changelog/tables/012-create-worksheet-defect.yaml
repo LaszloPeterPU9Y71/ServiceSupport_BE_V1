@@ -27,7 +27,6 @@ databaseChangeLog:
             baseColumnNames: worksheet_id
             referencedTableName: worksheet
             referencedColumnNames: worksheet_id
-            onDelete: CASCADE
             constraintName: fk_worksheet_defect_worksheet
 
         - addForeignKeyConstraint:
@@ -35,5 +34,4 @@ databaseChangeLog:
             baseColumnNames: defect_id
             referencedTableName: defect
             referencedColumnNames: defect_id
-            onDelete: CASCADE
             constraintName: fk_worksheet_defect_defect
