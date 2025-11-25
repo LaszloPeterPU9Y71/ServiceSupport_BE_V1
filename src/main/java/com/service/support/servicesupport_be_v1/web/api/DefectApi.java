@@ -32,10 +32,39 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-21T16:50:32.344231+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-26T00:50:01.219711400+01:00[Europe/Budapest]")
 @Validated
 @Tag(name = "defect", description = "the defect API")
 public interface DefectApi {
+
+    /**
+     * GET /defects-active : Get all active defects
+     *
+     * @return List of active defects (status code 200)
+     */
+    @Operation(
+        operationId = "defectsActiveGet",
+        summary = "Get all active defects",
+        tags = { "defect" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "List of active defects", content = {
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Defect.class)))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "bearerAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/defects-active",
+        produces = { "application/json" }
+    )
+    
+    ResponseEntity<List<Defect>> defectsActiveGet(
+        
+    );
+
 
     /**
      * GET /defects : Get all defects

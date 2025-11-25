@@ -21,6 +21,10 @@ public class DefectService {
         return repository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
+    public List<DefectEntity> findAllByActiveTrue() {
+        return repository.findAllByActiveTrue(Sort.by(Sort.Direction.ASC, "name"));
+    }
+
     public DefectEntity findById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Defect not found with id " + id));
@@ -36,8 +40,14 @@ public class DefectService {
         return repository.save(existing);
     }
 
-    public void delete(Long id) {
+/*    public void delete(Long id) {
         DefectEntity existing = findById(id);
         repository.delete(existing);
+    }*/
+
+    public void softDelete(Long id) {
+        DefectEntity existing = findById(id);
+        existing.setActive(false);
+        repository.save(existing);
     }
 }

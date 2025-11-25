@@ -3,6 +3,8 @@ package com.service.support.servicesupport_be_v1.mapper;
 import com.service.support.servicesupport_be_v1.persistance.entity.DefectEntity;
 import com.service.support.servicesupport_be_v1.web.model.Defect;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 
 import java.util.List;
 

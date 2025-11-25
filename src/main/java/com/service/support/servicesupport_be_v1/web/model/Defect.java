@@ -18,12 +18,14 @@ import jakarta.annotation.Generated;
  * Defect
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-21T16:50:32.344231+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-26T00:50:01.219711400+01:00[Europe/Budapest]")
 public class Defect {
 
   private Integer id;
 
   private String name;
+
+  private Boolean status;
 
   public Defect id(Integer id) {
     this.id = id;
@@ -65,6 +67,26 @@ public class Defect {
     this.name = name;
   }
 
+  public Defect status(Boolean status) {
+    this.status = status;
+    return this;
+  }
+
+  /**
+   * Get status
+   * @return status
+  */
+  
+  @Schema(name = "status", example = "false", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("status")
+  public Boolean getStatus() {
+    return status;
+  }
+
+  public void setStatus(Boolean status) {
+    this.status = status;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -75,12 +97,13 @@ public class Defect {
     }
     Defect defect = (Defect) o;
     return Objects.equals(this.id, defect.id) &&
-        Objects.equals(this.name, defect.name);
+        Objects.equals(this.name, defect.name) &&
+        Objects.equals(this.status, defect.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name);
+    return Objects.hash(id, name, status);
   }
 
   @Override
@@ -89,6 +112,7 @@ public class Defect {
     sb.append("class Defect {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }

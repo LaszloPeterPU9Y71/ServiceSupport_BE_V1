@@ -19,6 +19,12 @@ public class DefectController implements DefectApi {
     private final DefectService service;
     private final DefectMapper mapper;
 
+    @Override
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<List<Defect>> defectsActiveGet() {
+        return ResponseEntity.ok(mapper.toDtoList(service.findAllByActiveTrue()));
+    }
+
 
     @Override
     @PreAuthorize("isAuthenticated()")
@@ -28,7 +34,7 @@ public class DefectController implements DefectApi {
 
     @Override
     public ResponseEntity<Void> defectsIdDelete(Integer id) {
-        service.delete(id.longValue());
+        service.softDelete(id.longValue());
         return ResponseEntity.noContent().build();
     }
 
@@ -46,7 +52,7 @@ public class DefectController implements DefectApi {
         return ResponseEntity.ok(mapper.toDto(updated));
     }
 
-    @Override
+
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Defect> defectsPost(Defect defect) {
         DefectEntity saved = service.create(mapper.toEntity(defect));

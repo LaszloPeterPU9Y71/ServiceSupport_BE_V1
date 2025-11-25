@@ -18,7 +18,7 @@ import jakarta.annotation.Generated;
  * SparePart
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-21T16:50:32.344231+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-26T00:50:01.219711400+01:00[Europe/Budapest]")
 public class SparePart {
 
   private Integer id;
