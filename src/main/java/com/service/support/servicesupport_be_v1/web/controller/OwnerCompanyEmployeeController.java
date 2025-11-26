@@ -22,6 +22,11 @@ public class OwnerCompanyEmployeeController implements OwnerCompanyEmployeeApi {
     }
 
     @Override
+    public ResponseEntity<List<OwnerCompanyEmployee>> ownerCompanyEmployeesActiveGet() {
+        return ResponseEntity.ok(mapper.toDtoList(service.findAllByActiveTrue()));
+    }
+
+    @Override
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<OwnerCompanyEmployee>> ownerCompanyEmployeesGet() {
         return ResponseEntity.ok(mapper.toDtoList(service.findAll()));
@@ -46,9 +51,9 @@ public class OwnerCompanyEmployeeController implements OwnerCompanyEmployeeApi {
     }
 
     @Override
-    @PreAuthorize("hasRole('ADMIN_ROLE')")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> ownerCompanyEmployeesIdDelete(Integer id) {
-        service.delete(id.longValue());
+        service.SoftDelete(id.longValue());
         return ResponseEntity.noContent().build();
     }
 }

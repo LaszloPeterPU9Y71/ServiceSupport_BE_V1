@@ -21,7 +21,7 @@ import jakarta.annotation.Generated;
  * RegisterUserRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-26T17:24:07.606950200+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-26T18:48:58.462971800+01:00[Europe/Budapest]")
 public class RegisterUserRequest {
 
   private String fullName;

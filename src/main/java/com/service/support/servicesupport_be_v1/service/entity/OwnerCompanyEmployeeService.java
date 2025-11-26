@@ -32,6 +32,10 @@ public class OwnerCompanyEmployeeService {
     public List<OwnerCompanyEmployeeEntity> findAll() {
         return repository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
+    public List<OwnerCompanyEmployeeEntity> findAllByActiveTrue() {
+        return repository.findAllByActiveTrue(Sort.by(Sort.Direction.ASC, "name"));
+    }
+
 
     public OwnerCompanyEmployeeEntity findById(Long id) {
         return repository.findById(id)
@@ -60,8 +64,9 @@ public class OwnerCompanyEmployeeService {
     }
 
 
-    public void delete(Long id) {
+    public void SoftDelete(Long id) {
         OwnerCompanyEmployeeEntity existing = findById(id);
-        repository.delete(existing);
+        existing.setActive(false);
+        repository.save(existing);
     }
 }

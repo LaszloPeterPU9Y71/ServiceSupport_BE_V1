@@ -32,10 +32,39 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-26T17:24:07.606950200+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-26T18:48:58.462971800+01:00[Europe/Budapest]")
 @Validated
 @Tag(name = "owner_company_employee", description = "the owner_company_employee API")
 public interface OwnerCompanyEmployeeApi {
+
+    /**
+     * GET /owner-company-employees-active : Get all active employees
+     *
+     * @return List of active employees (status code 200)
+     */
+    @Operation(
+        operationId = "ownerCompanyEmployeesActiveGet",
+        summary = "Get all active employees",
+        tags = { "owner_company_employee" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "List of active employees", content = {
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = OwnerCompanyEmployee.class)))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "bearerAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/owner-company-employees-active",
+        produces = { "application/json" }
+    )
+    
+    ResponseEntity<List<OwnerCompanyEmployee>> ownerCompanyEmployeesActiveGet(
+        
+    );
+
 
     /**
      * GET /owner-company-employees : Get all employees

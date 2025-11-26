@@ -31,3 +31,10 @@ databaseChangeLog:
               - column:
                   name: owner_company_town
                   type: VARCHAR(255)
+              - column:
+                  name: owner_company_status
+                  type: BIT(1)
+                  defaultValueNumeric: "1"
+                  constraints:
+                    nullable: false
+

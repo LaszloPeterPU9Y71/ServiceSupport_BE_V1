@@ -22,6 +22,8 @@ public class OwnerCompanyService {
         return repository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
+    public List<OwnerCompanyEntity> findAllByActiveTrue() { return repository.findAllByActiveTrue(Sort.by(Sort.Direction.ASC, "name"));}
+
     public OwnerCompanyEntity findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Nincs entity ilyen id-val:"+id));
     }
@@ -30,8 +32,10 @@ public class OwnerCompanyService {
         return repository.save(entity);
     }
 
-    public void deleteById(Long id) {
-        repository.deleteById(id);
+    public void softDelete(Long id) {
+        OwnerCompanyEntity existing = findById(id);
+        existing.setActive(false);
+        repository.save(existing);
     }
 
     public OwnerCompanyEntity findByName(String ownerCompanyName) {

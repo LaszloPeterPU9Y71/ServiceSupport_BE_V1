@@ -32,4 +32,7 @@ public class OwnerCompanyEntity {
 
     @Column(name = "owner_company_town", length = 255)
     private String town;
+
+    @Column(name = "owner_company_status", nullable = false)
+    private boolean active = true;
 }

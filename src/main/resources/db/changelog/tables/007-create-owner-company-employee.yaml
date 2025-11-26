@@ -32,3 +32,9 @@ databaseChangeLog:
                     nullable: true
                     foreignKeyName: fk_owner_company_employee_company
                     references: owner_company(owner_company_id)
+              - column:
+                  name: owner_company_employee_status
+                  type: BIT(1)
+                  defaultValueNumeric: "1"
+                  constraints:
+                    nullable: false

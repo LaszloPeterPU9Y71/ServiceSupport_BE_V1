@@ -23,16 +23,21 @@ public class OwnerCompanyController implements OwnerCompanyApi {
     }
 
     @Override
+    public ResponseEntity<List<OwnerCompany>> ownerCompaniesActiveGet() {
+        return ResponseEntity.ok(mapper.toDtoList(service.findAllByActiveTrue()));
+    }
+
+    @Override
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<OwnerCompany>> ownerCompaniesGet() {
         return ResponseEntity.ok(mapper.toDtoList(service.findAll()));
     }
 
     @Override
-    @PreAuthorize("hasRole('ADMIN_ROLE')")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> ownerCompaniesIdDelete(Integer id) {
         OwnerCompanyEntity entity = service.findById(id.longValue());
-        service.deleteById(entity.getId());
+        service.softDelete(entity.getId());
         return ResponseEntity.noContent().build();
     }
 

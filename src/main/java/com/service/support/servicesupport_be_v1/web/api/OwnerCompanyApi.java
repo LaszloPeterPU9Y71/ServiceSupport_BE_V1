@@ -32,10 +32,39 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-26T17:24:07.606950200+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-26T18:48:58.462971800+01:00[Europe/Budapest]")
 @Validated
 @Tag(name = "owner_company", description = "the owner_company API")
 public interface OwnerCompanyApi {
+
+    /**
+     * GET /owner-companies-active : Get all active owner companies
+     *
+     * @return List of active companies (status code 200)
+     */
+    @Operation(
+        operationId = "ownerCompaniesActiveGet",
+        summary = "Get all active owner companies",
+        tags = { "owner_company" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "List of active companies", content = {
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = OwnerCompany.class)))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "bearerAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/owner-companies-active",
+        produces = { "application/json" }
+    )
+    
+    ResponseEntity<List<OwnerCompany>> ownerCompaniesActiveGet(
+        
+    );
+
 
     /**
      * GET /owner-companies : Get all owner companies

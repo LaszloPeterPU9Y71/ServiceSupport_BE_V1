@@ -18,7 +18,7 @@ import jakarta.annotation.Generated;
  * OwnerCompanyEmployee
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-26T17:24:07.606950200+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-26T18:48:58.462971800+01:00[Europe/Budapest]")
 public class OwnerCompanyEmployee {
 
   private Integer id;
@@ -32,6 +32,8 @@ public class OwnerCompanyEmployee {
   private String title;
 
   private String ownerCompanyName;
+
+  private Boolean status;
 
   public OwnerCompanyEmployee id(Integer id) {
     this.id = id;
@@ -153,6 +155,26 @@ public class OwnerCompanyEmployee {
     this.ownerCompanyName = ownerCompanyName;
   }
 
+  public OwnerCompanyEmployee status(Boolean status) {
+    this.status = status;
+    return this;
+  }
+
+  /**
+   * Get status
+   * @return status
+  */
+  
+  @Schema(name = "status", example = "false", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("status")
+  public Boolean getStatus() {
+    return status;
+  }
+
+  public void setStatus(Boolean status) {
+    this.status = status;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -167,12 +189,13 @@ public class OwnerCompanyEmployee {
         Objects.equals(this.name, ownerCompanyEmployee.name) &&
         Objects.equals(this.telNum, ownerCompanyEmployee.telNum) &&
         Objects.equals(this.title, ownerCompanyEmployee.title) &&
-        Objects.equals(this.ownerCompanyName, ownerCompanyEmployee.ownerCompanyName);
+        Objects.equals(this.ownerCompanyName, ownerCompanyEmployee.ownerCompanyName) &&
+        Objects.equals(this.status, ownerCompanyEmployee.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, email, name, telNum, title, ownerCompanyName);
+    return Objects.hash(id, email, name, telNum, title, ownerCompanyName, status);
   }
 
   @Override
@@ -185,6 +208,7 @@ public class OwnerCompanyEmployee {
     sb.append("    telNum: ").append(toIndentedString(telNum)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    ownerCompanyName: ").append(toIndentedString(ownerCompanyName)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }

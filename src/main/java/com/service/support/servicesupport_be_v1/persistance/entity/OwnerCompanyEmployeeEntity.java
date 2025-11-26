@@ -26,6 +26,9 @@ public class OwnerCompanyEmployeeEntity {
     @Column(name = "owner_company_employee_title", length = 255)
     private String title;
 
+    @Column(name = "owner_company_employee_status", nullable = false)
+    private boolean active = true;
+
     // Kapcsolat a céghez
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_company_employee", referencedColumnName = "owner_company_id")

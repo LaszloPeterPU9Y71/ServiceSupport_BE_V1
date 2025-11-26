@@ -29,7 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         return User
                 .withUsername(user.getEmail())
-                .password(user.getPasswordHash())  // bcrypt hash a DB-ben
+                .password(user.getPasswordHash())
                 .authorities(authorities)
                 .disabled(!user.isEnabled())
                 .build();

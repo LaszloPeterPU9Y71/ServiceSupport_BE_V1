@@ -18,7 +18,7 @@ import jakarta.annotation.Generated;
  * OwnerCompany
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-26T17:24:07.606950200+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-26T18:48:58.462971800+01:00[Europe/Budapest]")
 public class OwnerCompany {
 
   private Integer id;
@@ -34,6 +34,8 @@ public class OwnerCompany {
   private String taxNumber;
 
   private String town;
+
+  private Boolean status;
 
   public OwnerCompany id(Integer id) {
     this.id = id;
@@ -175,6 +177,26 @@ public class OwnerCompany {
     this.town = town;
   }
 
+  public OwnerCompany status(Boolean status) {
+    this.status = status;
+    return this;
+  }
+
+  /**
+   * Get status
+   * @return status
+  */
+  
+  @Schema(name = "status", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("status")
+  public Boolean getStatus() {
+    return status;
+  }
+
+  public void setStatus(Boolean status) {
+    this.status = status;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -190,12 +212,13 @@ public class OwnerCompany {
         Objects.equals(this.postalCode, ownerCompany.postalCode) &&
         Objects.equals(this.street, ownerCompany.street) &&
         Objects.equals(this.taxNumber, ownerCompany.taxNumber) &&
-        Objects.equals(this.town, ownerCompany.town);
+        Objects.equals(this.town, ownerCompany.town) &&
+        Objects.equals(this.status, ownerCompany.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, accountNumber, name, postalCode, street, taxNumber, town);
+    return Objects.hash(id, accountNumber, name, postalCode, street, taxNumber, town, status);
   }
 
   @Override
@@ -209,6 +232,7 @@ public class OwnerCompany {
     sb.append("    street: ").append(toIndentedString(street)).append("\n");
     sb.append("    taxNumber: ").append(toIndentedString(taxNumber)).append("\n");
     sb.append("    town: ").append(toIndentedString(town)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }
