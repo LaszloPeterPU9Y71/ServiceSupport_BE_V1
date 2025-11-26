@@ -35,3 +35,9 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     unique: true
+              - column:
+                  name: spare_parts_status
+                  type: BIT(1)
+                  defaultValueNumeric: "1"
+                  constraints:
+                    nullable: false

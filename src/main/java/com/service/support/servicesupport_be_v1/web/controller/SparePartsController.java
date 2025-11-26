@@ -45,6 +45,15 @@ public class SparePartsController implements SparePartApi {
     }
 
     @Override
+    public ResponseEntity<List<SparePart>> sparePartsActiveGet(String name) {
+        if (name != null && !name.isBlank()) {
+            return ResponseEntity.ok(mapper.toDtoList(service.findByName(name)));
+        } else {
+            return ResponseEntity.ok(mapper.toDtoList(service.findAllByActiveTrue()));
+        }
+    }
+
+    @Override
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<SparePart>> sparePartsGet(String name) {
         if (name != null && !name.isBlank()) {
@@ -57,7 +66,7 @@ public class SparePartsController implements SparePartApi {
     @Override
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> sparePartsIdDelete(Integer id) {
-        service.delete(id.longValue());
+        service.softDelete(id.longValue());
         return ResponseEntity.noContent().build();
     }
 }

@@ -33,6 +33,7 @@ public class DefectController implements DefectApi {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> defectsIdDelete(Integer id) {
         service.softDelete(id.longValue());
         return ResponseEntity.noContent().build();

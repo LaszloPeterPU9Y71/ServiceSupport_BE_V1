@@ -20,6 +20,9 @@ public class SparePartsService {
         return repository.findAll(Sort.by(Sort.Direction.ASC, "itemName"));
     }
 
+    public List<SparePartsEntity> findAllByActiveTrue() {
+        return repository.findAllByActiveTrue(Sort.by(Sort.Direction.ASC, "itemName"));
+    }
     public SparePartsEntity findById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Spare part not found with id " + id));
@@ -39,9 +42,10 @@ public class SparePartsService {
         return repository.save(sparePart);
     }
 
-    public void delete(Long id) {
+    public void softDelete(Long id) {
         SparePartsEntity existing = findById(id);
-        repository.delete(existing);
+        existing.setActive(false);
+        repository.save(existing);
     }
 }
 

@@ -32,10 +32,40 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-26T00:50:01.219711400+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-26T17:24:07.606950200+01:00[Europe/Budapest]")
 @Validated
 @Tag(name = "spare_part", description = "the spare_part API")
 public interface SparePartApi {
+
+    /**
+     * GET /spare-parts-active : List or search active spare parts
+     *
+     * @param name If provided, filters spare parts by partial name match (optional)
+     * @return List of active spare parts (status code 200)
+     */
+    @Operation(
+        operationId = "sparePartsActiveGet",
+        summary = "List or search active spare parts",
+        tags = { "spare_part" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "List of active spare parts", content = {
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = SparePart.class)))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "bearerAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/spare-parts-active",
+        produces = { "application/json" }
+    )
+    
+    ResponseEntity<List<SparePart>> sparePartsActiveGet(
+        @Parameter(name = "name", description = "If provided, filters spare parts by partial name match", in = ParameterIn.QUERY) @Valid @RequestParam(value = "name", required = false) String name
+    );
+
 
     /**
      * GET /spare-parts : List or search spare parts

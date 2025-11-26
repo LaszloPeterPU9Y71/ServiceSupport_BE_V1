@@ -27,5 +27,8 @@ public class SparePartsEntity {
     @Column(name = "spare_parts_item_number", length = 255, nullable = false, unique = true)
     private String itemNumber;
 
+    @Column(name = "spare_parts_status", nullable = false)
+    private boolean active = true;
+
 
 }

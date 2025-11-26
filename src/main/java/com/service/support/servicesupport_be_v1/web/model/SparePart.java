@@ -18,7 +18,7 @@ import jakarta.annotation.Generated;
  * SparePart
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-26T00:50:01.219711400+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-26T17:24:07.606950200+01:00[Europe/Budapest]")
 public class SparePart {
 
   private Integer id;
@@ -30,6 +30,8 @@ public class SparePart {
   private Integer nettoBuyingPrice;
 
   private Integer nettoSellingPrice;
+
+  private Boolean status;
 
   public SparePart id(Integer id) {
     this.id = id;
@@ -131,6 +133,26 @@ public class SparePart {
     this.nettoSellingPrice = nettoSellingPrice;
   }
 
+  public SparePart status(Boolean status) {
+    this.status = status;
+    return this;
+  }
+
+  /**
+   * Get status
+   * @return status
+  */
+  
+  @Schema(name = "status", example = "false", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("status")
+  public Boolean getStatus() {
+    return status;
+  }
+
+  public void setStatus(Boolean status) {
+    this.status = status;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -144,12 +166,13 @@ public class SparePart {
         Objects.equals(this.itemName, sparePart.itemName) &&
         Objects.equals(this.itemNumber, sparePart.itemNumber) &&
         Objects.equals(this.nettoBuyingPrice, sparePart.nettoBuyingPrice) &&
-        Objects.equals(this.nettoSellingPrice, sparePart.nettoSellingPrice);
+        Objects.equals(this.nettoSellingPrice, sparePart.nettoSellingPrice) &&
+        Objects.equals(this.status, sparePart.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, itemName, itemNumber, nettoBuyingPrice, nettoSellingPrice);
+    return Objects.hash(id, itemName, itemNumber, nettoBuyingPrice, nettoSellingPrice, status);
   }
 
   @Override
@@ -161,6 +184,7 @@ public class SparePart {
     sb.append("    itemNumber: ").append(toIndentedString(itemNumber)).append("\n");
     sb.append("    nettoBuyingPrice: ").append(toIndentedString(nettoBuyingPrice)).append("\n");
     sb.append("    nettoSellingPrice: ").append(toIndentedString(nettoSellingPrice)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }
