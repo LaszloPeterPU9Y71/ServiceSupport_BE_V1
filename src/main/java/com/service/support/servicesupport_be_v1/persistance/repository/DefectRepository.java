@@ -5,9 +5,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DefectRepository extends JpaRepository<DefectEntity, Long> {
 
     List<DefectEntity> findAllByActiveTrue(Sort name);
 
+    Optional<DefectEntity> findByName(String name);
 }

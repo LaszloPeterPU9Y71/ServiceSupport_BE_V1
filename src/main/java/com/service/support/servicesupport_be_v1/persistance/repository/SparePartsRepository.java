@@ -6,9 +6,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface SparePartsRepository extends JpaRepository<SparePartsEntity, Long> {
     List<SparePartsEntity> findByItemNameContainingIgnoreCase(String name);
 
     List<SparePartsEntity> findAllByActiveTrue(Sort name);
+
+    Optional<SparePartsEntity> findByItemNumber(String itemNumber);
 }

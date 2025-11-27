@@ -22,7 +22,7 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("forgotPassword_200_response")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-26T18:48:58.462971800+01:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-11-28T00:56:50.465067900+01:00[Europe/Budapest]")
 public class ForgotPassword200Response {
 
   private String message;

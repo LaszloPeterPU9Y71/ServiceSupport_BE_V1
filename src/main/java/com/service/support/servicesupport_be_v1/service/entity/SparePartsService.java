@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +34,18 @@ public class SparePartsService {
     }
 
     public SparePartsEntity create(SparePartsEntity sparePart) {
+
+        Optional<SparePartsEntity> existingOpt = repository.findByItemNumber(sparePart.getItemNumber());
+
+        if (existingOpt.isPresent()) {
+            SparePartsEntity existing = existingOpt.get();
+
+            if (!existing.isActive()) {
+                existing.setActive(true);
+                return repository.save(existing);
+            }
+            throw new IllegalArgumentException("Spare part's item number is already in use: " + sparePart.getItemNumber());
+        }
         return repository.save(sparePart);
     }
 

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DefectService {
@@ -31,6 +32,17 @@ public class DefectService {
     }
 
     public DefectEntity create(DefectEntity defect) {
+
+        Optional<DefectEntity> existingOpt = repository.findByName(defect.getName());
+        if (existingOpt.isPresent()) {
+            DefectEntity existing = existingOpt.get();
+
+            if (!existing.isActive()) {
+                existing.setActive(true);
+                return repository.save(existing);
+            }
+            throw new IllegalArgumentException("Defect name is already in use: " + defect.getName());
+        }
         return repository.save(defect);
     }
 
@@ -39,11 +51,6 @@ public class DefectService {
         existing.setName(defect.getName());
         return repository.save(existing);
     }
-
-/*    public void delete(Long id) {
-        DefectEntity existing = findById(id);
-        repository.delete(existing);
-    }*/
 
     public void softDelete(Long id) {
         DefectEntity existing = findById(id);
