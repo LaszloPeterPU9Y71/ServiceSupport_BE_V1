@@ -3,6 +3,7 @@ package com.service.support.servicesupport_be_v1.service.entity;
 
 import com.service.support.servicesupport_be_v1.exception.ResourceNotFoundException;
 import com.service.support.servicesupport_be_v1.mapper.OwnerCompanyEmployeeMapper;
+import com.service.support.servicesupport_be_v1.persistance.entity.DefectEntity;
 import com.service.support.servicesupport_be_v1.persistance.entity.OwnerCompanyEmployeeEntity;
 import com.service.support.servicesupport_be_v1.persistance.repository.OwnerCompanyEmployeeRepository;
 import com.service.support.servicesupport_be_v1.persistance.repository.OwnerCompanyRepository;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OwnerCompanyEmployeeService {
@@ -42,11 +44,27 @@ public class OwnerCompanyEmployeeService {
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id " + id));
     }
 
-    public OwnerCompanyEmployeeEntity create(OwnerCompanyEmployee dto) {
+    /*public OwnerCompanyEmployeeEntity create(OwnerCompanyEmployee dto) {
         OwnerCompanyEmployeeEntity result = mapper.toEntity(dto);
         result.setOwnerCompany(ownerCompanyService.findByName(dto.getOwnerCompanyName()));
         return repository.save(result);
+    }*/
+
+    public OwnerCompanyEmployeeEntity create(OwnerCompanyEmployeeEntity ownerCompanyEmployeeEntity) {
+
+        Optional<OwnerCompanyEmployeeEntity> existingOpt = repository.findByEmail(ownerCompanyEmployeeEntity.getEmail());
+        if (existingOpt.isPresent()) {
+            OwnerCompanyEmployeeEntity existing = existingOpt.get();
+
+            if (!existing.isActive()) {
+                existing.setActive(true);
+                return repository.save(existing);
+            }
+            throw new IllegalArgumentException("User e-mail is already in use: " + ownerCompanyEmployeeEntity.getEmail());
+        }
+        return repository.save(ownerCompanyEmployeeEntity);
     }
+
 
     public OwnerCompanyEmployeeEntity update(Long id, OwnerCompanyEmployee updated) {
         OwnerCompanyEmployeeEntity existing = findById(id);

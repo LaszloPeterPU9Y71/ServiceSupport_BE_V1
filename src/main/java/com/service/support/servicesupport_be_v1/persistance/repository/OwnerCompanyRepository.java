@@ -6,9 +6,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OwnerCompanyRepository extends JpaRepository<OwnerCompanyEntity, Long> {
     OwnerCompanyEntity findByName(String name);
 
     List<OwnerCompanyEntity> findAllByActiveTrue(Sort name);
+
+    Optional<OwnerCompanyEntity> findByTaxNumber(String taxNumber);
 }

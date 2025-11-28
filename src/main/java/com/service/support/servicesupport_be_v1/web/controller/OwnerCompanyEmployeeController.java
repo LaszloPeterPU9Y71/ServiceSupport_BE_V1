@@ -1,6 +1,7 @@
 package com.service.support.servicesupport_be_v1.web.controller;
 
 import com.service.support.servicesupport_be_v1.mapper.OwnerCompanyEmployeeMapper;
+import com.service.support.servicesupport_be_v1.persistance.entity.OwnerCompanyEmployeeEntity;
 import com.service.support.servicesupport_be_v1.service.entity.OwnerCompanyEmployeeService;
 import com.service.support.servicesupport_be_v1.web.api.OwnerCompanyEmployeeApi;
 import com.service.support.servicesupport_be_v1.web.model.OwnerCompanyEmployee;
@@ -41,7 +42,8 @@ public class OwnerCompanyEmployeeController implements OwnerCompanyEmployeeApi {
     @Override
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<OwnerCompanyEmployee> ownerCompanyEmployeesPost(OwnerCompanyEmployee employee) {
-        return ResponseEntity.ok(mapper.toDto(service.create(employee)));
+        OwnerCompanyEmployeeEntity saved = service.create(mapper.toEntity(employee));
+        return ResponseEntity.ok(mapper.toDto(saved));
     }
 
     @Override
